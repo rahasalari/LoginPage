@@ -22,9 +22,8 @@ const Register = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const emailValue = data.email;
     localStorage.setItem("emailValue", JSON.stringify(emailValue));
+    console.log(data);
   };
-
-  console.log(errors);
 
   const [visible, setVisible] = useState(false);
   const visibleHandler = () => {

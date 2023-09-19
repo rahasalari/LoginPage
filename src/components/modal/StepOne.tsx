@@ -4,18 +4,18 @@ import { IoCloseOutline } from "react-icons/io5";
 
 type Inputs = {
   email: string;
-  password: string;
 };
 
-const StepOne = () => {
+const StepOne = (props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const emailValue = data.email;
-    localStorage.setItem("emailValue", JSON.stringify(emailValue));
+    const modifyEmail = data.email;
+    console.log(data);
+    localStorage.setItem("modifyEmail", JSON.stringify(modifyEmail));
   };
 
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -23,6 +23,7 @@ const StepOne = () => {
   const closeHandler = () => {
     setShowModal(false);
   };
+
   return (
     <>
       <a
@@ -34,10 +35,10 @@ const StepOne = () => {
       {showModal && (
         <>
           <div className=" my-auto z-50">
-            <div className="fixed inset-0 flex-row justify-center mx-auto my-auto w-144 h-128 bg-white border rounded-2xl">
+            <div className="fixed inset-0 flex-row justify-center mx-auto my-auto w-144 h-[530px] bg-white border rounded-2xl">
               <div>
                 <IoCloseOutline
-                  className="bg-gray-200 rounded-md text-2xl ms-7 mt-4 w-7 h-6 cursor-pointer"
+                  className="bg-gray-200 rounded-md text-2xl ms-7 mt-6 w-7 h-6 cursor-pointer"
                   onClick={closeHandler}
                 />
               </div>
@@ -68,11 +69,12 @@ const StepOne = () => {
                 <a className="absolute mt-14 right-44 text-info text-12 font-bold cursor-pointer">
                   بازگشت به صفحه ورود
                 </a>
-                <div className="flex justify-center mt-28">
+                <div className="flex justify-center mt-24">
                   <input
                     type="submit"
                     value="ادامه"
                     className=" bg-primary px-20 pb-3 pt-2 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
+                    onClick={props.onCliclProp}
                   />
                 </div>
               </form>
