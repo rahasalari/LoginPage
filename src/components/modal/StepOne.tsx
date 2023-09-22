@@ -10,18 +10,32 @@ const StepOne = (props) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const modifyEmail = data.email;
     console.log(data);
+    const modifyEmail = data.email;
     localStorage.setItem("modifyEmail", JSON.stringify(modifyEmail));
   };
 
   const [showModal, setShowModal] = useState<boolean>(false);
+  //email
+
+  const modifyEmail = watch("email");
 
   const closeHandler = () => {
     setShowModal(false);
+  };
+
+  const click = (e) => {
+    e.preventDefault();
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (emailRegex.test(modifyEmail)) {
+      console.log(modifyEmail);
+      localStorage.setItem("modifyEmail", JSON.stringify(modifyEmail));
+    }
   };
 
   return (
@@ -74,7 +88,7 @@ const StepOne = (props) => {
                     type="submit"
                     value="ادامه"
                     className=" bg-primary px-20 pb-3 pt-2 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
-                    onClick={props.onCliclProp}
+                    onClick={click}
                   />
                 </div>
               </form>
