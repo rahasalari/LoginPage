@@ -14,6 +14,7 @@ function StepTwo(props) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -36,8 +37,11 @@ function StepTwo(props) {
 
   //get code by onclick
   function click() {
-    const separateCode = Object.values(data);
-    const code = separateCode.join("");
+    const firstInput = watch("firstInput");
+    const secondInput = watch("secondInput");
+    const thirdInput = watch("thirdInput");
+    const fourthInput = watch("fourthInput");
+    const code = `${firstInput}${secondInput}${thirdInput}${fourthInput}`;
     console.log(code);
     if (code.length === 4) {
       props.onCliclProp();
