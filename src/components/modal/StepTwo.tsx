@@ -19,24 +19,29 @@ function StepTwo(props) {
 
   //get code
   const onSubmit = (data) => {
-    // const separateCode = Object.values(data);
-    // const code = separateCode.join("");
-    // console.log(code);
+    const separateCode = Object.values(data);
+    const code = separateCode.join("");
+    console.log(code);
   };
 
-  const email = localStorage.getItem("modifyEmail");
-  const modifyEmail = email?.replace(/"|'/g, "");
-
+  //show modal
   const [showModal, setShowModal] = useState<boolean>(true);
-
   const closeHandler = () => {
     setShowModal(false);
   };
 
+  //get email
+  const email = localStorage.getItem("modifyEmail");
+  const modifyEmail = email?.replace(/"|'/g, "");
+
+  //get code by onclick
   function click() {
     const separateCode = Object.values(data);
     const code = separateCode.join("");
     console.log(code);
+    if (code.length === 4) {
+      props.onCliclProp();
+    }
   }
 
   return (
