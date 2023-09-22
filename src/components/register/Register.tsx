@@ -17,6 +17,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -33,6 +34,13 @@ const Register = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+
+  //phone regex
+  const phoneRegex = watch("phoneNumber");
+  // console.log(phoneRegex);
+
+  watch("phoneNumber").replace(/[^0-9]+$/gi, "");
+  // console.log(watch("phoneNumber"));
 
   //phone number format
   // const phoneNumberFormat = (phoneNumber) => {
@@ -63,8 +71,8 @@ const Register = () => {
                   defaultValue="+98"
                   className={`${
                     errors.phoneNumber
-                      ? " right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded px-13 outline-red"
-                      : " right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded px-13 outline-primary"
+                      ? " right-3 font-semibold border-2 border-red h-12 w-54 mx-auto ms-4 rounded px-13 outline-red"
+                      : " right-3 font-semibold border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded px-13 outline-primary"
                   }`}
                   {...register("phoneNumber", {
                     required: true,
@@ -75,7 +83,7 @@ const Register = () => {
                   <img src={flag} className=" w-5" />
                   <p className=" text-9 font-bold">ایران</p>
                 </div>
-                <div className="absolute left-15 top-2.5 border-r-2 border-gray-400 h-7"></div>
+                <div className="absolute left-15 top-2.5 border-r-2 border-gray-200 h-7"></div>
                 <br></br>
                 {errors.phoneNumber &&
                   errors.phoneNumber.type === "required" && (
