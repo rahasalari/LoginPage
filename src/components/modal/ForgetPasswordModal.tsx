@@ -6,11 +6,11 @@ import StepThree from "./StepThree";
 const ForgetPasswordModal = () => {
   const [step, setStep] = useState(0);
 
-  const stepHandler = (e) => {
-    e.preventDefault();
-    // console.log("step");
+  function stepHandler(e) {
+    // e.preventDefault();
+    console.log("step");
     setStep((prevState) => prevState + 1);
-  };
+  }
 
   return (
     <>

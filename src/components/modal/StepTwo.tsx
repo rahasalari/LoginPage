@@ -10,7 +10,7 @@ type Inputs = {
   fourthInput: string;
 };
 
-const StepTwo = (props) => {
+function StepTwo(props) {
   const {
     register,
     handleSubmit,
@@ -19,9 +19,9 @@ const StepTwo = (props) => {
 
   //get code
   const onSubmit = (data) => {
-    const separateCode = Object.values(data);
-    const code = separateCode.join("");
-    console.log(code);
+    // const separateCode = Object.values(data);
+    // const code = separateCode.join("");
+    // console.log(code);
   };
 
   const email = localStorage.getItem("modifyEmail");
@@ -32,6 +32,12 @@ const StepTwo = (props) => {
   const closeHandler = () => {
     setShowModal(false);
   };
+
+  function click() {
+    const separateCode = Object.values(data);
+    const code = separateCode.join("");
+    console.log(code);
+  }
 
   return (
     <>
@@ -103,7 +109,10 @@ const StepTwo = (props) => {
                     type="submit"
                     value="ادامه "
                     className="bg-primary px-15 pb-3 pt-2 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
-                    onClick={props.onCliclProp}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      click();
+                    }}
                   />
                 </div>
               </form>
@@ -114,5 +123,5 @@ const StepTwo = (props) => {
       )}
     </>
   );
-};
+}
 export default StepTwo;
