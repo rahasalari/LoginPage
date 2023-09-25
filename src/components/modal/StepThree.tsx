@@ -13,6 +13,8 @@ const StepThree = () => {
   const {
     register,
     handleSubmit,
+    reset,
+    trigger,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -28,6 +30,7 @@ const StepThree = () => {
 
   const closeHandler = () => {
     setShowModal(false);
+    reset();
   };
 
   const visibleHandler = () => {
@@ -36,6 +39,14 @@ const StepThree = () => {
 
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
+  };
+
+  const blurPasswordHandler = (password) => {
+    trigger(password);
+  };
+
+  const blurRepeatPasswordHandler = (repeatPassword) => {
+    trigger(repeatPassword);
   };
 
   return (
@@ -62,7 +73,7 @@ const StepThree = () => {
               <p className="flex justify-center font-bold text-gray-400 text-sm mt-3">
                 حداقل ۱۰ کاراکتر باشد
               </p>
-              <form
+              <div
                 onSubmit={handleSubmit(onSubmit)}
                 className="grid justify-center mt-15"
               >
@@ -85,27 +96,33 @@ const StepThree = () => {
                       }`}
                       {...register("password", {
                         required: true,
-                        minLength: 8,
+                        minLength: 10,
                       })}
+                      onBlur={() => blurPasswordHandler("password")}
                     />
                     <br></br>
-                    {errors.password && errors.password.type === "required" && (
-                      <li className="text-red text-xs text-right me-1">
-                        وارد کردن پسورد اجباریست
-                      </li>
-                    )}
-                    {errors.password &&
-                      errors.password.type === "minLength" && (
-                        <li className="text-red text-xs text-right me-1">
-                          پسورد حداقل دارای 8 کاراکتر است
-                        </li>
-                      )}
+                    <ol className="relative list-inside list-decimal">
+                      <LineErrors errors={errors} />
+                      {errors.password &&
+                        errors.password.type === "required" && (
+                          <li className="relative text-red text-xs text-right me-1 mt-1">
+                            <span className=" absolute right-3">
+                              وارد کردن پسورد اجباریست
+                            </span>
+                          </li>
+                        )}
+                      {errors.password &&
+                        errors.password.type === "minLength" && (
+                          <li className="text-red text-xs text-right me-1">
+                            .پسورد حداقل دارای 10 کاراکتر است
+                          </li>
+                        )}
+                    </ol>
                     <MdOutlineVisibility
                       onMouseDown={visibleHandler}
                       onMouseUp={visibleHandler}
                       className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                     />
-                    <LineErrors errors={errors} />
                   </div>
                   <div className="relative mt-10">
                     <label
@@ -124,22 +141,20 @@ const StepThree = () => {
                       }`}
                       {...register("repeatPassword", {
                         required: true,
-                        minLength: 8,
                       })}
+                      onBlur={() => blurRepeatPasswordHandler("repeatPassword")}
                     />
                     <br></br>
-                    {errors.repeatPassword &&
-                      errors.repeatPassword.type === "required" && (
-                        <li className="text-red text-xs text-right me-1">
-                          وارد کردن پسورد اجباریست
-                        </li>
-                      )}
-                    {errors.repeatPassword &&
-                      errors.repeatPassword.type === "minLength" && (
-                        <li className="text-red text-xs text-right me-1">
-                          پسورد حداقل دارای 8 کاراکتر است
-                        </li>
-                      )}
+                    <ul className="relative list-inside list-disc mt-1">
+                      {errors.repeatPassword &&
+                        errors.repeatPassword.type === "required" && (
+                          <li className="relative text-red text-xs text-right me-1">
+                            <span className=" absolute right-6">
+                              وارد کردن پسورد اجباریست
+                            </span>
+                          </li>
+                        )}
+                    </ul>
                     <MdOutlineVisibility
                       onMouseDown={togglePasswordVisiblity}
                       onMouseUp={togglePasswordVisiblity}
@@ -154,7 +169,7 @@ const StepThree = () => {
                     className="bg-primary px-13 pb-3 pt-2 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
                   />
                 </div>
-              </form>
+              </div>
             </div>
           </div>
           <div className="backdrop-blur-[2px] fixed inset-0 z-40"></div>

@@ -15,6 +15,7 @@ function StepTwo(props) {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -35,6 +36,7 @@ function StepTwo(props) {
   const [showModal, setShowModal] = useState<boolean>(true);
   const closeHandler = () => {
     setShowModal(false);
+    reset();
   };
 
   //get email
@@ -81,7 +83,7 @@ function StepTwo(props) {
                 ارسال شده به
               </p>
 
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <div onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex gap-2 justify-center mt-14">
                   <input
                     id="firstInput"
@@ -117,8 +119,8 @@ function StepTwo(props) {
                   />
                 </div>
                 <div className="grid justify-items-center ms-60">
-                  {/* <Timer seconds={8} /> */}
-                  <Timer />
+                  <Timer seconds={180} />
+                  {/* <Timer /> */}
                 </div>
                 <div className=" grid justify-center mt-14">
                   <input
@@ -131,7 +133,7 @@ function StepTwo(props) {
                     }}
                   />
                 </div>
-              </form>
+              </div>
             </div>
           </div>
           <div className="backdrop-blur-[2px] fixed inset-0 z-40"></div>

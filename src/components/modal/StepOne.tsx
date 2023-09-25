@@ -11,6 +11,8 @@ const StepOne = (props) => {
     register,
     handleSubmit,
     watch,
+    trigger,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -22,18 +24,24 @@ const StepOne = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const closeHandler = () => {
     setShowModal(false);
+    reset();
   };
 
   //email
   const modifyEmail = watch("email");
 
-  function click() {
-    const emailRegex = /\S+@\S+\.\S+/;
+  function click(email) {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     if (emailRegex.test(modifyEmail)) {
       localStorage.setItem("modifyEmail", JSON.stringify(modifyEmail));
       props.onCliclProp();
     }
+    trigger(email);
   }
+
+  const blurEmailHandler = (email) => {
+    trigger(email);
+  };
 
   return (
     <>
@@ -56,7 +64,7 @@ const StepOne = (props) => {
               <p className="flex justify-center font-bold text-gray-700 text-sm mt-16">
                 رمز عبور خود را فراموش کرده اید؟
               </p>
-              <form
+              <div
                 onSubmit={handleSubmit(onSubmit)}
                 className="relative text-center mt-16"
               >
@@ -75,9 +83,28 @@ const StepOne = (props) => {
                   }`}
                   {...register("email", {
                     required: true,
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   })}
+                  onBlur={() => blurEmailHandler("email")}
                 />
-                <a className="absolute mt-14 right-44 text-info text-12 font-bold cursor-pointer">
+                <br></br>
+                <ul className="relative right-[164px] list-inside list-disc">
+                  {errors.email && errors.email.type === "required" && (
+                    <li className="relative text-red text-xs text-right mt-1">
+                      <span className=" absolute right-6">
+                        .وارد کردن ایمیل اجباریست
+                      </span>
+                    </li>
+                  )}
+                  {errors.email && errors.email.type === "pattern" && (
+                    <li className="relative text-red text-xs text-right mt-1">
+                      <span className=" absolute right-6">
+                        .فرمت ایمیل را به طور صحیح وارد کنید
+                      </span>
+                    </li>
+                  )}
+                </ul>
+                <a className="absolute mt-2 right-44 text-info text-12 font-bold cursor-pointer">
                   بازگشت به صفحه ورود
                 </a>
                 <div className="flex justify-center mt-24">
@@ -91,7 +118,7 @@ const StepOne = (props) => {
                     }}
                   />
                 </div>
-              </form>
+              </div>
             </div>
           </div>
           <div className="backdrop-blur-[2px] fixed inset-0 z-40"></div>

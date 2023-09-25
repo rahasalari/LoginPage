@@ -54,7 +54,7 @@ const Login = () => {
                   }`}
                   {...register("password", {
                     required: true,
-                    minLength: 10,
+                    // minLength: 10,
                   })}
                   onBlur={() => blurPasswordHandler("password")}
                 />
@@ -67,13 +67,13 @@ const Login = () => {
                       </span>
                     </li>
                   )}
-                  {errors.password && errors.password.type === "minLength" && (
+                  {/* {errors.password && errors.password.type === "minLength" && (
                     <li className="relative text-red text-xs text-right mt-1">
                       <span className=" absolute right-6">
                         .پسورد حداقل دارای 10 کاراکتر است
                       </span>
                     </li>
-                  )}
+                  )} */}
                 </ul>
                 <MdOutlineVisibility
                   onMouseDown={visibleHandler}

@@ -27,10 +27,10 @@ const Timer = ({ seconds }) => {
     }
   }, [countdown]);
 
-  const timerHandler = () => {
-    console.log("1");
-    formatTime(countdown);
-  };
+  // const timerHandler = () => {
+  //   console.log("1");
+  //   formatTime(countdown);
+  // };
 
   return (
     <>
@@ -39,7 +39,7 @@ const Timer = ({ seconds }) => {
       ) : (
         <p
           className="text-primary text-xs cursor-pointer mt-2 me-9"
-          onClick={timerHandler}
+          // onClick={timerHandler}
         >
           ارسال مجدد کد
         </p>
