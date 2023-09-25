@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Timer from "../timer/Timer";
 import { IoCloseOutline } from "react-icons/io5";
@@ -17,6 +17,12 @@ function StepTwo(props) {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
+
+  //refs
+  // const inputFirstRef = useRef(null);
+  // const inputSecondtRef = useRef(null);
+  // const inputThirdRef = useRef(null);
+  // const inputFourthRef = useRef(null);
 
   //get code
   const onSubmit = (data) => {
@@ -111,7 +117,8 @@ function StepTwo(props) {
                   />
                 </div>
                 <div className="grid justify-items-center ms-60">
-                  <Timer seconds={180} />
+                  {/* <Timer seconds={8} /> */}
+                  <Timer />
                 </div>
                 <div className=" grid justify-center mt-14">
                   <input

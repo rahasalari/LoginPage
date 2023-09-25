@@ -37,9 +37,10 @@ const Register = () => {
 
   //phone regex
   const phoneRegex = watch("phoneNumber");
-  // console.log(phoneRegex);
+  console.log(phoneRegex);
 
-  watch("phoneNumber").replace(/[^0-9]+$/gi, "");
+  // phoneRegex.replace(/[^0-9]+$/gi, "");
+  // watch("phoneNumber").replace(/[^0-9]+$/gi, "");
   // console.log(watch("phoneNumber"));
 
   //phone number format
@@ -157,7 +158,8 @@ const Register = () => {
                     </li>
                   )}
                 <MdOutlineVisibility
-                  onClick={togglePasswordVisiblity}
+                  onMouseDown={togglePasswordVisiblity}
+                  onMouseUp={togglePasswordVisiblity}
                   className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
@@ -207,7 +209,8 @@ const Register = () => {
                 </li>
               )}
               <MdOutlineVisibility
-                onClick={visibleHandler}
+                onMouseDown={visibleHandler}
+                onMouseUp={visibleHandler}
                 className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
               />
               <LineErrors errors={errors} />

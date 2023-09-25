@@ -10,8 +10,8 @@ const Timer = ({ seconds }) => {
     const seconds = Math.floor(time - minutes * 60);
     if (minutes <= 60) minutes - 0 + minutes;
     if (seconds <= 60) seconds - 0 + seconds;
-    const t = seconds.toString();
-    return `0${minutes} : ${t.length < 2 ? 0 : ""}${seconds}`;
+    const secondToString = seconds.toString();
+    return `0${minutes} : ${secondToString.length < 2 ? 0 : ""}${seconds}`;
   };
 
   useEffect(() => {
@@ -27,12 +27,20 @@ const Timer = ({ seconds }) => {
     }
   }, [countdown]);
 
+  const timerHandler = () => {
+    console.log("1");
+    formatTime(countdown);
+  };
+
   return (
     <>
       {countdown > 0 ? (
         <p className="text-xs mt-1 text-gray-400 ">{formatTime(countdown)}</p>
       ) : (
-        <p className="text-primary text-xs cursor-pointer mt-2 me-9">
+        <p
+          className="text-primary text-xs cursor-pointer mt-2 me-9"
+          onClick={timerHandler}
+        >
           ارسال مجدد کد
         </p>
       )}

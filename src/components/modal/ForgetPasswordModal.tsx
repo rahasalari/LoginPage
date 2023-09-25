@@ -7,8 +7,6 @@ const ForgetPasswordModal = () => {
   const [step, setStep] = useState(0);
 
   function stepHandler(e) {
-    // e.preventDefault();
-    console.log("step");
     setStep((prevState) => prevState + 1);
   }
 

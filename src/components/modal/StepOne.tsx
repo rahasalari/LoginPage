@@ -15,7 +15,6 @@ const StepOne = (props) => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     const modifyEmail = data.email;
     localStorage.setItem("modifyEmail", JSON.stringify(modifyEmail));
   };
@@ -31,7 +30,6 @@ const StepOne = (props) => {
   function click() {
     const emailRegex = /\S+@\S+\.\S+/;
     if (emailRegex.test(modifyEmail)) {
-      console.log(modifyEmail);
       localStorage.setItem("modifyEmail", JSON.stringify(modifyEmail));
       props.onCliclProp();
     }

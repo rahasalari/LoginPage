@@ -21,20 +21,23 @@ const StepThree = () => {
     console.log(data);
   };
 
+  //states
   const [showModal, setShowModal] = useState<boolean>(true);
+  const [visible, setVisible] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const closeHandler = () => {
     setShowModal(false);
   };
 
-  const [visible, setVisible] = useState(false);
   const visibleHandler = () => {
     setVisible(visible ? false : true);
   };
-  const [passwordShown, setPasswordShown] = useState(false);
+
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+
   return (
     <>
       <a
@@ -54,7 +57,7 @@ const StepThree = () => {
                 />
               </div>
               <p className="flex justify-center font-bold text-gray-700 text-base mt-10">
-                تعریف رمز عبور
+                تعریف رمز ورود
               </p>
               <p className="flex justify-center font-bold text-gray-400 text-sm mt-3">
                 حداقل ۱۰ کاراکتر باشد
@@ -98,7 +101,8 @@ const StepThree = () => {
                         </li>
                       )}
                     <MdOutlineVisibility
-                      onClick={visibleHandler}
+                      onMouseDown={visibleHandler}
+                      onMouseUp={visibleHandler}
                       className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                     />
                     <LineErrors errors={errors} />
@@ -137,7 +141,8 @@ const StepThree = () => {
                         </li>
                       )}
                     <MdOutlineVisibility
-                      onClick={togglePasswordVisiblity}
+                      onMouseDown={togglePasswordVisiblity}
+                      onMouseUp={togglePasswordVisiblity}
                       className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                     />
                   </div>

@@ -13,6 +13,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
@@ -20,6 +21,14 @@ const Login = () => {
   const [visible, setVisible] = useState(false);
   const visibleHandler = () => {
     setVisible(visible ? false : true);
+  };
+
+  const blurPasswordHandler = (password) => {
+    trigger(password);
+  };
+
+  const blurEmailHandler = (email) => {
+    trigger(email);
   };
 
   return (
@@ -45,22 +54,31 @@ const Login = () => {
                   }`}
                   {...register("password", {
                     required: true,
-                    minLength: 8,
+                    minLength: 10,
                   })}
+                  onBlur={() => blurPasswordHandler("password")}
                 />
                 <br></br>
-                {errors.password && errors.password.type === "required" && (
-                  <li className="text-red text-xs text-right me-1">
-                    وارد کردن پسورد اجباریست
-                  </li>
-                )}
-                {errors.password && errors.password.type === "minLength" && (
-                  <li className="text-red text-xs text-right me-1">
-                    پسورد حداقل دارای 8 کاراکتر است
-                  </li>
-                )}
+                <ul className="relative left-3 list-inside list-disc">
+                  {errors.password && errors.password.type === "required" && (
+                    <li className="relative text-red text-xs text-right mt-1">
+                      <span className=" absolute right-6">
+                        .وارد کردن پسورد اجباریست
+                      </span>
+                    </li>
+                  )}
+                  {errors.password && errors.password.type === "minLength" && (
+                    <li className="relative text-red text-xs text-right mt-1">
+                      <span className=" absolute right-6">
+                        .پسورد حداقل دارای 10 کاراکتر است
+                      </span>
+                    </li>
+                  )}
+                </ul>
                 <MdOutlineVisibility
-                  onClick={visibleHandler}
+                  onMouseDown={visibleHandler}
+                  onMouseUp={visibleHandler}
+                  // onmouseout={visibleHandler}
                   className="absolute left-4 top-3.5 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
@@ -84,14 +102,27 @@ const Login = () => {
                 }`}
                 {...register("email", {
                   required: true,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 })}
+                onBlur={() => blurEmailHandler("email")}
               />
               <br></br>
-              {errors.email && errors.email.type === "required" && (
-                <li className="text-red text-xs text-right me-1">
-                  وارد کردن ایمیل اجباریست
-                </li>
-              )}
+              <ul className="relative left-3 list-inside list-disc">
+                {errors.email && errors.email.type === "required" && (
+                  <li className="relative text-red text-xs text-right mt-1">
+                    <span className=" absolute right-6">
+                      .وارد کردن ایمیل اجباریست
+                    </span>
+                  </li>
+                )}
+                {errors.email && errors.email.type === "pattern" && (
+                  <li className="relative text-red text-xs text-right mt-1">
+                    <span className=" absolute right-6">
+                      .فرمت ایمیل را به طور صحیح وارد کنید
+                    </span>
+                  </li>
+                )}
+              </ul>
             </div>
           </div>
           <div className="flex justify-center mt-14">
