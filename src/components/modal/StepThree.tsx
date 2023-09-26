@@ -15,6 +15,7 @@ const StepThree = () => {
     handleSubmit,
     reset,
     trigger,
+    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -33,6 +34,7 @@ const StepThree = () => {
     reset();
   };
 
+  //show password
   const visibleHandler = () => {
     setVisible(visible ? false : true);
   };
@@ -48,6 +50,12 @@ const StepThree = () => {
   const blurRepeatPasswordHandler = (repeatPassword) => {
     trigger(repeatPassword);
   };
+
+  //password validation
+  const checkPassword = watch("password");
+  const letterRegex = /^(?=.*[a-z])(?=.*[A-Z])/;
+  const numberRegex = /\d/;
+  const symbolRegex = /[^\w\s]/;
 
   return (
     <>
@@ -101,23 +109,39 @@ const StepThree = () => {
                       onBlur={() => blurPasswordHandler("password")}
                     />
                     <br></br>
-                    <ol className="relative list-inside list-decimal">
-                      <LineErrors errors={errors} />
-                      {errors.password &&
-                        errors.password.type === "required" && (
-                          <li className="relative text-red text-xs text-right me-1 mt-1">
+                    <LineErrors errors={errors} />
+                    {checkPassword && (
+                      <ol className="relative list-inside list-decimal mt-1">
+                        <p className="relative text-red text-[9px] font-bold text-right me-1">
+                          پسورد باید شامل موارد زیر باشد
+                        </p>
+                        {checkPassword.length < 9 && (
+                          <li className="relative text-red text-[9px] font-bold text-right me-1">
                             <span className=" absolute right-3">
-                              وارد کردن پسورد اجباریست
+                              حداقل 10 کاراکتر
                             </span>
                           </li>
                         )}
-                      {errors.password &&
-                        errors.password.type === "minLength" && (
-                          <li className="text-red text-xs text-right me-1">
-                            .پسورد حداقل دارای 10 کاراکتر است
+                        {!letterRegex.test(checkPassword) && (
+                          <li className="relative text-red text-[9px] font-bold text-right me-1">
+                            <span className=" absolute right-3">
+                              حروف بزرگ و کوچک
+                            </span>
                           </li>
                         )}
-                    </ol>
+                        {!numberRegex.test(checkPassword) && (
+                          <li className="relative text-red text-[9px] font-bold text-right me-1">
+                            <span className=" absolute right-3">اعداد</span>
+                          </li>
+                        )}
+                        {!symbolRegex.test(checkPassword) && (
+                          <li className="relative text-red text-[9px] font-bold text-right me-1">
+                            <span className=" absolute right-3">نشانه ها</span>
+                          </li>
+                        )}
+                      </ol>
+                    )}
+
                     <MdOutlineVisibility
                       onMouseDown={visibleHandler}
                       onMouseUp={visibleHandler}
@@ -135,7 +159,7 @@ const StepThree = () => {
                       id="repeatPassword"
                       type={passwordShown ? "text" : "password"}
                       className={`${
-                        errors.password
+                        errors.repeatPassword
                           ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded text-right px-1 outline-red"
                           : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded text-right px-1 outline-primary"
                       }`}

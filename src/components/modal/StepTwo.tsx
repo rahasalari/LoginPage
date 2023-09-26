@@ -20,8 +20,8 @@ function StepTwo(props) {
   } = useForm<Inputs>();
 
   //refs
-  // const inputFirstRef = useRef(null);
-  // const inputSecondtRef = useRef(null);
+  // const firstInputRef = useRef(null);
+  // const secondInputRef = useRef(null);
   // const inputThirdRef = useRef(null);
   // const inputFourthRef = useRef(null);
 
