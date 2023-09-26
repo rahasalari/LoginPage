@@ -109,21 +109,30 @@ const StepThree = () => {
                       onBlur={() => blurPasswordHandler("password")}
                     />
                     <br></br>
-                    <LineErrors errors={errors} />
+                    <LineErrors
+                      // errors={errors}
+                      className="rounded-lg w-[52px] h-1 bg-warning"
+                    />
                     {checkPassword && (
                       <ol className="relative list-inside list-decimal mt-1">
-                        <p
-                          className={`${
-                            !letterRegex.test(checkPassword) &&
-                            !numberRegex.test(checkPassword) &&
-                            !symbolRegex.test(checkPassword) &&
-                            checkPassword.length < 9
-                              ? "relative text-red text-[9px] font-bold text-right me-1"
-                              : "relative text-warning text-[9px] font-bold text-right me-1"
-                          }`}
-                        >
-                          : پسورد باید شامل موارد زیر باشد
-                        </p>
+                        {!letterRegex.test(checkPassword) ||
+                        !numberRegex.test(checkPassword) ||
+                        !symbolRegex.test(checkPassword) ||
+                        checkPassword.length < 9 ? (
+                          <p
+                            className={`${
+                              !letterRegex.test(checkPassword) &&
+                              !numberRegex.test(checkPassword) &&
+                              !symbolRegex.test(checkPassword) &&
+                              checkPassword.length < 9
+                                ? "relative text-red text-[9px] font-bold text-right me-1"
+                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                            }`}
+                          >
+                            : پسورد باید شامل موارد زیر باشد
+                          </p>
+                        ) : null}
+
                         {checkPassword.length < 9 && (
                           <li
                             className={`${
