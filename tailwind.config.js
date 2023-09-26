@@ -20,6 +20,7 @@ export default {
         snow: "#FBFBFB",
         red: "#CB0E0E",
         info: "#007BFF",
+        warning: "#F29059",
       },
       height: {
         "8/9": "90%",

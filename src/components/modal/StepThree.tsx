@@ -75,7 +75,7 @@ const StepThree = () => {
                   onClick={closeHandler}
                 />
               </div>
-              <p className="flex justify-center font-bold text-gray-700 text-base mt-10">
+              <p className="flex justify-center font-bold text-gray-700 text-base mt-6">
                 تعریف رمز ورود
               </p>
               <p className="flex justify-center font-bold text-gray-400 text-sm mt-3">
@@ -83,7 +83,7 @@ const StepThree = () => {
               </p>
               <div
                 onSubmit={handleSubmit(onSubmit)}
-                className="grid justify-center mt-15"
+                className="grid justify-center mt-11"
               >
                 <div className="me-4">
                   <div className="relative">
@@ -112,30 +112,75 @@ const StepThree = () => {
                     <LineErrors errors={errors} />
                     {checkPassword && (
                       <ol className="relative list-inside list-decimal mt-1">
-                        <p className="relative text-red text-[9px] font-bold text-right me-1">
-                          پسورد باید شامل موارد زیر باشد
+                        <p
+                          className={`${
+                            !letterRegex.test(checkPassword) &&
+                            !numberRegex.test(checkPassword) &&
+                            !symbolRegex.test(checkPassword) &&
+                            checkPassword.length < 9
+                              ? "relative text-red text-[9px] font-bold text-right me-1"
+                              : "relative text-warning text-[9px] font-bold text-right me-1"
+                          }`}
+                        >
+                          : پسورد باید شامل موارد زیر باشد
                         </p>
                         {checkPassword.length < 9 && (
-                          <li className="relative text-red text-[9px] font-bold text-right me-1">
+                          <li
+                            className={`${
+                              !letterRegex.test(checkPassword) &&
+                              !numberRegex.test(checkPassword) &&
+                              !symbolRegex.test(checkPassword) &&
+                              checkPassword.length < 9
+                                ? "relative text-red text-[9px] font-bold text-right me-1"
+                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                            }`}
+                          >
                             <span className=" absolute right-3">
                               حداقل 10 کاراکتر
                             </span>
                           </li>
                         )}
                         {!letterRegex.test(checkPassword) && (
-                          <li className="relative text-red text-[9px] font-bold text-right me-1">
+                          <li
+                            className={`${
+                              !letterRegex.test(checkPassword) &&
+                              !numberRegex.test(checkPassword) &&
+                              !symbolRegex.test(checkPassword) &&
+                              checkPassword.length < 9
+                                ? "relative text-red text-[9px] font-bold text-right me-1"
+                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                            }`}
+                          >
                             <span className=" absolute right-3">
                               حروف بزرگ و کوچک
                             </span>
                           </li>
                         )}
                         {!numberRegex.test(checkPassword) && (
-                          <li className="relative text-red text-[9px] font-bold text-right me-1">
+                          <li
+                            className={`${
+                              !letterRegex.test(checkPassword) &&
+                              !numberRegex.test(checkPassword) &&
+                              !symbolRegex.test(checkPassword) &&
+                              checkPassword.length < 9
+                                ? "relative text-red text-[9px] font-bold text-right me-1"
+                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                            }`}
+                          >
                             <span className=" absolute right-3">اعداد</span>
                           </li>
                         )}
                         {!symbolRegex.test(checkPassword) && (
-                          <li className="relative text-red text-[9px] font-bold text-right me-1">
+                          <li
+                            className={`${
+                              !letterRegex.test(checkPassword) &&
+                              !numberRegex.test(checkPassword) &&
+                              !symbolRegex.test(checkPassword) &&
+                              checkPassword.length < 9
+                                ? "relative text-red text-[9px] font-bold text-right me-1"
+                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                            }`}
+                          >
                             <span className=" absolute right-3">نشانه ها</span>
                           </li>
                         )}
@@ -148,7 +193,7 @@ const StepThree = () => {
                       className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                     />
                   </div>
-                  <div className="relative mt-10">
+                  <div className="relative mt-8">
                     <label
                       htmlFor="repeatPassword"
                       className="absolute left-36 -top-3 text-sm font-semibold bg-white w-20 text-center"
