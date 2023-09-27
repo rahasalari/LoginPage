@@ -75,16 +75,6 @@ const StepThree = () => {
       }
     });
   }
-  console.log(truePassword);
-
-  // const a = [1, 1, 3, 4];
-  // const b = [];
-  // a.forEach((item) => {
-  //   if (item === 1) {
-  //     b.push(item);
-  //   }
-  // });
-  // console.log(b.length);
 
   return (
     <>

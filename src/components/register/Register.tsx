@@ -39,20 +39,30 @@ const Register = () => {
   const phoneRegex = watch("phoneNumber");
   console.log(phoneRegex);
 
-  // phoneRegex.replace(/[^0-9]+$/gi, "");
-  // watch("phoneNumber").replace(/[^0-9]+$/gi, "");
-  // console.log(watch("phoneNumber"));
+  //password validation
+  const checkPassword = watch("password");
+  const letterRegex = /^(?=.*[a-z])(?=.*[A-Z])/;
+  const numberRegex = /\d/;
+  const symbolRegex = /[^\w\s]/;
 
-  //phone number format
-  // const phoneNumberFormat = (phoneNumber) => {
-  //   const number = phoneNumber.trim().replace(/[^0-9]/g, "");
+  let passwordErrors;
+  let truePassword = [];
+  if (checkPassword) {
+    passwordErrors = [
+      !letterRegex.test(checkPassword),
+      !numberRegex.test(checkPassword),
+      !symbolRegex.test(checkPassword),
+      checkPassword.length < 9,
+    ];
+  }
 
-  //   if (number.length < 4) return number;
-  //   if (number.length < 7) return number.replace(/(\d{3})(\d{1})/, "$1-$2");
-  //   if (number.length < 11)
-  //     return number.replace(/(\d{3})(\d{3})(\d{1})/, "$1-$2-$3");
-  //   return number.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-  // };
+  if (passwordErrors) {
+    passwordErrors.forEach((item) => {
+      if (item === true) {
+        truePassword.push(item);
+      }
+    });
+  }
 
   return (
     <>
@@ -213,10 +223,152 @@ const Register = () => {
                 onMouseUp={visibleHandler}
                 className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
               />
-              <LineErrors errors={errors} />
+              <LineErrors
+                errors={errors}
+                firstLineError={`${
+                  (!passwordErrors && "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (passwordErrors &&
+                    truePassword.length === 4 &&
+                    "rounded-lg w-[52px] h-1 bg-red") ||
+                  (passwordErrors &&
+                    truePassword.length < 4 &&
+                    truePassword.length > 0 &&
+                    "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (passwordErrors &&
+                    truePassword.length === 0 &&
+                    "rounded-lg w-[52px] h-1 bg-success")
+                }`}
+                secondLineError={`${
+                  (!passwordErrors && "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (passwordErrors &&
+                    truePassword.length === 4 &&
+                    "rounded-lg w-[52px] h-1 bg-red") ||
+                  (passwordErrors &&
+                    truePassword.length === 3 &&
+                    "rounded-lg w-[52px] h-1 bg-warning") ||
+                  (passwordErrors &&
+                    truePassword.length < 3 &&
+                    truePassword.length > 0 &&
+                    "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (passwordErrors &&
+                    truePassword.length === 0 &&
+                    "rounded-lg w-[52px] h-1 bg-success")
+                }`}
+                thirdLineError={`${
+                  (!passwordErrors && "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (passwordErrors &&
+                    truePassword.length === 4 &&
+                    "rounded-lg w-[52px] h-1 bg-red") ||
+                  (passwordErrors &&
+                    truePassword.length > 1 &&
+                    truePassword.length < 4 &&
+                    "rounded-lg w-[52px] h-1 bg-warning") ||
+                  (passwordErrors &&
+                    truePassword.length === 1 &&
+                    "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (passwordErrors &&
+                    truePassword.length === 0 &&
+                    "rounded-lg w-[52px] h-1 bg-success")
+                }`}
+                fourthLineError={`${
+                  (!passwordErrors && "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (passwordErrors &&
+                    truePassword.length === 4 &&
+                    "rounded-lg w-[52px] h-1 bg-red") ||
+                  (passwordErrors &&
+                    truePassword.length > 0 &&
+                    truePassword.length < 4 &&
+                    "rounded-lg w-[52px] h-1 bg-warning") ||
+                  (passwordErrors &&
+                    truePassword.length === 0 &&
+                    "rounded-lg w-[52px] h-1 bg-success")
+                }`}
+              />
+              {checkPassword && (
+                <ol className="relative list-inside list-decimal mt-1">
+                  {!letterRegex.test(checkPassword) ||
+                  !numberRegex.test(checkPassword) ||
+                  !symbolRegex.test(checkPassword) ||
+                  checkPassword.length < 9 ? (
+                    <p
+                      className={`${
+                        !letterRegex.test(checkPassword) &&
+                        !numberRegex.test(checkPassword) &&
+                        !symbolRegex.test(checkPassword) &&
+                        checkPassword.length < 9
+                          ? "relative text-red text-[9px] font-bold text-right me-1"
+                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                      }`}
+                    >
+                      : پسورد باید شامل موارد زیر باشد
+                    </p>
+                  ) : null}
+
+                  {checkPassword.length < 9 && (
+                    <li
+                      className={`${
+                        !letterRegex.test(checkPassword) &&
+                        !numberRegex.test(checkPassword) &&
+                        !symbolRegex.test(checkPassword) &&
+                        checkPassword.length < 9
+                          ? "relative text-red text-[9px] font-bold text-right me-1"
+                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                      }`}
+                    >
+                      <span className=" absolute right-3">
+                        حداقل 10 کاراکتر
+                      </span>
+                    </li>
+                  )}
+                  {!letterRegex.test(checkPassword) && (
+                    <li
+                      className={`${
+                        !letterRegex.test(checkPassword) &&
+                        !numberRegex.test(checkPassword) &&
+                        !symbolRegex.test(checkPassword) &&
+                        checkPassword.length < 9
+                          ? "relative text-red text-[9px] font-bold text-right me-1"
+                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                      }`}
+                    >
+                      <span className=" absolute right-3">
+                        حروف بزرگ و کوچک
+                      </span>
+                    </li>
+                  )}
+                  {!numberRegex.test(checkPassword) && (
+                    <li
+                      className={`${
+                        !letterRegex.test(checkPassword) &&
+                        !numberRegex.test(checkPassword) &&
+                        !symbolRegex.test(checkPassword) &&
+                        checkPassword.length < 9
+                          ? "relative text-red text-[9px] font-bold text-right me-1"
+                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                      }`}
+                    >
+                      <span className=" absolute right-3">اعداد</span>
+                    </li>
+                  )}
+                  {!symbolRegex.test(checkPassword) && (
+                    <li
+                      className={`${
+                        !letterRegex.test(checkPassword) &&
+                        !numberRegex.test(checkPassword) &&
+                        !symbolRegex.test(checkPassword) &&
+                        checkPassword.length < 9
+                          ? "relative text-red text-[9px] font-bold text-right me-1"
+                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                      }`}
+                    >
+                      <span className=" absolute right-3">نشانه ها</span>
+                    </li>
+                  )}
+                </ol>
+              )}
             </div>
           </div>
-          <div className=" grid justify-center mt-24">
+          <div className=" grid justify-center mt-20">
             <input
               type="submit"
               value="ارسال کد"
