@@ -57,6 +57,35 @@ const StepThree = () => {
   const numberRegex = /\d/;
   const symbolRegex = /[^\w\s]/;
 
+  let passwordErrors;
+  let truePassword = [];
+  if (checkPassword) {
+    passwordErrors = [
+      !letterRegex.test(checkPassword),
+      !numberRegex.test(checkPassword),
+      !symbolRegex.test(checkPassword),
+      checkPassword.length < 9,
+    ];
+  }
+
+  if (passwordErrors) {
+    passwordErrors.forEach((item) => {
+      if (item === true) {
+        truePassword.push(item);
+      }
+    });
+  }
+  console.log(truePassword);
+
+  // const a = [1, 1, 3, 4];
+  // const b = [];
+  // a.forEach((item) => {
+  //   if (item === 1) {
+  //     b.push(item);
+  //   }
+  // });
+  // console.log(b.length);
+
   return (
     <>
       <a
@@ -99,7 +128,7 @@ const StepThree = () => {
                       type={visible ? "text" : "password"}
                       className={`${
                         errors.password
-                          ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded text-right px-1 outline-red"
+                          ? "right-3 border-2  h-12 w-54 mx-auto ms-4 rounded text-right px-1 outline-primary"
                           : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded text-right px-1 outline-primary"
                       }`}
                       {...register("password", {
@@ -110,8 +139,69 @@ const StepThree = () => {
                     />
                     <br></br>
                     <LineErrors
-                      // errors={errors}
-                      className="rounded-lg w-[52px] h-1 bg-warning"
+                      errors={errors}
+                      firstLineError={`${
+                        (!passwordErrors &&
+                          "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                        (passwordErrors &&
+                          truePassword.length === 4 &&
+                          "rounded-lg w-[52px] h-1 bg-red") ||
+                        (passwordErrors &&
+                          truePassword.length < 4 &&
+                          truePassword.length > 0 &&
+                          "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                        (passwordErrors &&
+                          truePassword.length === 0 &&
+                          "rounded-lg w-[52px] h-1 bg-success")
+                      }`}
+                      secondLineError={`${
+                        (!passwordErrors &&
+                          "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                        (passwordErrors &&
+                          truePassword.length === 4 &&
+                          "rounded-lg w-[52px] h-1 bg-red") ||
+                        (passwordErrors &&
+                          truePassword.length === 3 &&
+                          "rounded-lg w-[52px] h-1 bg-warning") ||
+                        (passwordErrors &&
+                          truePassword.length < 3 &&
+                          truePassword.length > 0 &&
+                          "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                        (passwordErrors &&
+                          truePassword.length === 0 &&
+                          "rounded-lg w-[52px] h-1 bg-success")
+                      }`}
+                      thirdLineError={`${
+                        (!passwordErrors &&
+                          "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                        (passwordErrors &&
+                          truePassword.length === 4 &&
+                          "rounded-lg w-[52px] h-1 bg-red") ||
+                        (passwordErrors &&
+                          truePassword.length > 1 &&
+                          truePassword.length < 4 &&
+                          "rounded-lg w-[52px] h-1 bg-warning") ||
+                        (passwordErrors &&
+                          truePassword.length === 1 &&
+                          "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                        (passwordErrors &&
+                          truePassword.length === 0 &&
+                          "rounded-lg w-[52px] h-1 bg-success")
+                      }`}
+                      fourthLineError={`${
+                        (!passwordErrors &&
+                          "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                        (passwordErrors &&
+                          truePassword.length === 4 &&
+                          "rounded-lg w-[52px] h-1 bg-red") ||
+                        (passwordErrors &&
+                          truePassword.length > 0 &&
+                          truePassword.length < 4 &&
+                          "rounded-lg w-[52px] h-1 bg-warning") ||
+                        (passwordErrors &&
+                          truePassword.length === 0 &&
+                          "rounded-lg w-[52px] h-1 bg-success")
+                      }`}
                     />
                     {checkPassword && (
                       <ol className="relative list-inside list-decimal mt-1">

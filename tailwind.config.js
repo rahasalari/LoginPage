@@ -21,6 +21,7 @@ export default {
         red: "#CB0E0E",
         info: "#007BFF",
         warning: "#F29059",
+        success: "#87D97A",
       },
       height: {
         "8/9": "90%",
