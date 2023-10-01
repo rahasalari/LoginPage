@@ -18,12 +18,26 @@ const Register = () => {
     register,
     handleSubmit,
     watch,
+    trigger,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const emailValue = data.email;
     localStorage.setItem("emailValue", JSON.stringify(emailValue));
-    console.log(data);
+    phone === data.phoneNumber;
+    console.log(phone);
+
+    const datas = {
+      password: data.password,
+      repeatPassword: data.repeatPassword,
+      email: data.email,
+      phone: phone,
+    };
+    console.log(phone.length);
+
+    if (data.password === data.repeatPassword && phone.length === 12) {
+      console.log(datas);
+    }
   };
 
   const [visible, setVisible] = useState(false);
@@ -37,16 +51,12 @@ const Register = () => {
 
   const [phone, setPhone] = useState("");
 
-  //phone regex
-  // const phoneRegex = watch("phoneNumber");
-  // console.log(phoneRegex);
-
+  //phone format
   const phoneData = (e) => {
     let formattedNumber = e.target.value;
-    // Remove all non-digit characters from the input
+
     formattedNumber = formattedNumber.replace(/\D/g, "");
 
-    // Apply the desired phone number format
     if (formattedNumber.length >= 4 && formattedNumber.length < 7) {
       formattedNumber = `${formattedNumber.slice(0, 3)} ${formattedNumber.slice(
         3
@@ -55,8 +65,9 @@ const Register = () => {
       formattedNumber = `${formattedNumber.slice(0, 3)} ${formattedNumber.slice(
         3,
         6
-      )}-${formattedNumber.slice(6, 10)}`;
+      )} ${formattedNumber.slice(6, 10)}`;
     }
+    console.log(formattedNumber);
 
     setPhone(formattedNumber);
   };
@@ -86,6 +97,23 @@ const Register = () => {
     });
   }
 
+  //trigers
+  const blurPhoneNumberHandler = (phoneNumber) => {
+    trigger(phoneNumber);
+  };
+
+  const blurEmailHandler = (email) => {
+    trigger(email);
+  };
+
+  const blurPasswordHandler = (password) => {
+    trigger(password);
+  };
+
+  const blurRepeatPasswordHandler = (password) => {
+    trigger(password);
+  };
+
   return (
     <>
       <div className="pt-14">
@@ -106,11 +134,9 @@ const Register = () => {
                       ? " right-3 font-semibold border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-20 pb-0.5 outline-red"
                       : " right-3 font-semibold border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-20 pb-0.5 outline-primary"
                   }`}
-                  {...register("phoneNumber", {
-                    required: true,
-                  })}
                   onChange={phoneData}
                   value={phone}
+                  onBlur={() => blurPhoneNumberHandler("phone")}
                 />
 
                 <div className="absolute left-8 top-3.5">
@@ -122,12 +148,16 @@ const Register = () => {
                 </span>
                 <div className="absolute left-15 top-2.5 border-r-2 border-gray-200 h-7"></div>
                 <br></br>
-                {errors.phoneNumber &&
-                  errors.phoneNumber.type === "required" && (
-                    <li className="text-red text-xs float-right me-1">
-                      وارد کردن ایمیل اجباریست
-                    </li>
-                  )}
+                <ul className="relative left-3 list-inside list-disc">
+                  {errors.phoneNumber &&
+                    errors.phoneNumber.type === "required" && (
+                      <li className="relative text-red text-xs text-right mt-1">
+                        <span className=" absolute right-6">
+                          وارد کردن شماره همراه اجباریست
+                        </span>
+                      </li>
+                    )}
+                </ul>
               </div>
             </div>
             <div className="relative">
@@ -148,13 +178,25 @@ const Register = () => {
                   required: "required",
                   pattern: /\S+@\S+\.\S+/,
                 })}
+                onBlur={() => blurEmailHandler("email")}
               />
               <br></br>
-              {errors.email && errors.email.type === "required" && (
-                <li className="text-red text-xs float-right me-1">
-                  وارد کردن ایمیل اجباریست
-                </li>
-              )}
+              <ul className="relative left-3 list-inside list-disc">
+                {errors.email && errors.email.type === "required" && (
+                  <li className="relative text-red text-xs text-right mt-1">
+                    <span className=" absolute right-6">
+                      .وارد کردن ایمیل اجباریست
+                    </span>
+                  </li>
+                )}
+                {errors.email && errors.email.type === "pattern" && (
+                  <li className="relative text-red text-xs text-right mt-1">
+                    <span className=" absolute right-6">
+                      .فرمت ایمیل را به طور صحیح وارد کنید
+                    </span>
+                  </li>
+                )}
+              </ul>
             </div>
           </div>
 
@@ -179,20 +221,9 @@ const Register = () => {
                     required: true,
                     minLength: 8,
                   })}
+                  onBlur={() => blurRepeatPasswordHandler("repeatPassword")}
                 />
                 <br></br>
-                {errors.repeatPassword &&
-                  errors.repeatPassword.type === "required" && (
-                    <li className="text-red text-xs text-right me-1">
-                      وارد کردن پسورد اجباریست
-                    </li>
-                  )}
-                {errors.repeatPassword &&
-                  errors.repeatPassword.type === "minLength" && (
-                    <li className="text-red text-xs text-right me-1">
-                      پسورد حداقل دارای 8 کاراکتر است
-                    </li>
-                  )}
                 <MdOutlineVisibility
                   onMouseDown={togglePasswordVisiblity}
                   onMouseUp={togglePasswordVisiblity}
@@ -222,6 +253,7 @@ const Register = () => {
                   required: true,
                   minLength: 8,
                 })}
+                onBlur={() => blurPasswordHandler("password")}
               />
               <Tooltip
                 id="my-tooltip"
@@ -234,16 +266,6 @@ const Register = () => {
                 </ol>"
               />
               <br></br>
-              {errors.password && errors.password.type === "required" && (
-                <li className="text-red text-xs text-right me-1">
-                  وارد کردن پسورد اجباریست
-                </li>
-              )}
-              {errors.password && errors.password.type === "minLength" && (
-                <li className="text-red text-xs text-right me-1">
-                  پسورد حداقل دارای 8 کاراکتر است
-                </li>
-              )}
               <MdOutlineVisibility
                 onMouseDown={visibleHandler}
                 onMouseUp={visibleHandler}

@@ -54,7 +54,6 @@ const Login = () => {
                   }`}
                   {...register("password", {
                     required: true,
-                    // minLength: 10,
                   })}
                   onBlur={() => blurPasswordHandler("password")}
                 />
@@ -78,7 +77,6 @@ const Login = () => {
                 <MdOutlineVisibility
                   onMouseDown={visibleHandler}
                   onMouseUp={visibleHandler}
-                  // onmouseout={visibleHandler}
                   className="absolute left-4 top-3.5 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
