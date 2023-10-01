@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Tooltip } from "react-tooltip";
 import flag from "../../assets/flag.png";
 import LineErrors from "../lineErrors/LineErrors";
+import "./TooltipStyle.css";
 
 type Inputs = {
   email: string;
@@ -255,6 +256,7 @@ const Register = () => {
                 })}
                 onBlur={() => blurPasswordHandler("password")}
               />
+
               <Tooltip
                 id="my-tooltip"
                 place="bottom-start"
@@ -265,6 +267,7 @@ const Register = () => {
                 </b><br />حداقل 10 کاراکتر باشد
                 </ol>"
               />
+
               <br></br>
               <MdOutlineVisibility
                 onMouseDown={visibleHandler}

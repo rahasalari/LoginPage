@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Login from "../login/Login";
 import Register from "../register/Register";
-import Verificationcode from "../register/Verificationcode";
+import VerificationCode from "../register/Verificationcode";
 
 const Router = () => {
   return (
@@ -11,7 +11,7 @@ const Router = () => {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/verificationcode" element={<Verificationcode />} />
+        <Route path="/verificationcode" element={<VerificationCode />} />
       </Routes>
     </div>
   );
