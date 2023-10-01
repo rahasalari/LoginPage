@@ -35,9 +35,31 @@ const Register = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
+  const [phone, setPhone] = useState("");
+
   //phone regex
-  const phoneRegex = watch("phoneNumber");
-  console.log(phoneRegex);
+  // const phoneRegex = watch("phoneNumber");
+  // console.log(phoneRegex);
+
+  const phoneData = (e) => {
+    let formattedNumber = e.target.value;
+    // Remove all non-digit characters from the input
+    formattedNumber = formattedNumber.replace(/\D/g, "");
+
+    // Apply the desired phone number format
+    if (formattedNumber.length >= 4 && formattedNumber.length < 7) {
+      formattedNumber = `${formattedNumber.slice(0, 3)} ${formattedNumber.slice(
+        3
+      )}`;
+    } else if (formattedNumber.length >= 7) {
+      formattedNumber = `${formattedNumber.slice(0, 3)} ${formattedNumber.slice(
+        3,
+        6
+      )}-${formattedNumber.slice(6, 10)}`;
+    }
+
+    setPhone(formattedNumber);
+  };
 
   //password validation
   const checkPassword = watch("password");
@@ -79,21 +101,25 @@ const Register = () => {
                 </label>
                 <input
                   id="phoneNumber"
-                  defaultValue="+98"
                   className={`${
                     errors.phoneNumber
-                      ? " right-3 font-semibold border-2 border-red h-12 w-54 mx-auto ms-4 rounded px-13 outline-red"
-                      : " right-3 font-semibold border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded px-13 outline-primary"
+                      ? " right-3 font-semibold border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-20 pb-0.5 outline-red"
+                      : " right-3 font-semibold border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-20 pb-0.5 outline-primary"
                   }`}
                   {...register("phoneNumber", {
                     required: true,
                   })}
+                  onChange={phoneData}
+                  value={phone}
                 />
 
                 <div className="absolute left-8 top-3.5">
                   <img src={flag} className=" w-5" />
                   <p className=" text-9 font-bold">ایران</p>
                 </div>
+                <span className="absolute font-semibold left-16 pt-[11.5px] text-slate-700">
+                  +98
+                </span>
                 <div className="absolute left-15 top-2.5 border-r-2 border-gray-200 h-7"></div>
                 <br></br>
                 {errors.phoneNumber &&
@@ -115,8 +141,8 @@ const Register = () => {
                 id="email"
                 className={`${
                   errors.email
-                    ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded text-right px-1 outline-red"
-                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded text-right px-1 outline-primary"
+                    ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded px-1 outline-red"
+                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded px-1 outline-primary"
                 }`}
                 {...register("email", {
                   required: "required",
@@ -146,8 +172,8 @@ const Register = () => {
                   type={passwordShown ? "text" : "password"}
                   className={`${
                     errors.password
-                      ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded text-right px-1 outline-red"
-                      : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded text-right px-1 outline-primary"
+                      ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 outline-red"
+                      : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
                   }`}
                   {...register("repeatPassword", {
                     required: true,
@@ -189,8 +215,8 @@ const Register = () => {
                 type={visible ? "text" : "password"}
                 className={`${
                   errors.password
-                    ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded text-right px-1 outline-red"
-                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded text-right px-1 outline-primary"
+                    ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 outline-red"
+                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
                 }`}
                 {...register("password", {
                   required: true,
