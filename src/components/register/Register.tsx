@@ -31,7 +31,7 @@ const Register = () => {
       password: data.password,
       repeatPassword: data.repeatPassword,
       email: data.email,
-      phone: phone,
+      phoneNumber: phone,
     };
     console.log(phone.length);
 
@@ -176,7 +176,7 @@ const Register = () => {
                 }`}
                 {...register("email", {
                   required: "required",
-                  pattern: /\S+@\S+\.\S+/,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 })}
                 onBlur={() => blurEmailHandler("email")}
               />

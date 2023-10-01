@@ -25,6 +25,7 @@ const StepOne = (props) => {
   const closeHandler = () => {
     setShowModal(false);
     reset();
+    props.closeClick();
   };
 
   //email

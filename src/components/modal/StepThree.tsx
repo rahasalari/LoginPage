@@ -9,7 +9,7 @@ type Inputs = {
   repeatPassword: string;
 };
 
-const StepThree = () => {
+const StepThree = (props) => {
   const {
     register,
     handleSubmit,
@@ -32,6 +32,7 @@ const StepThree = () => {
   const closeHandler = () => {
     setShowModal(false);
     reset();
+    props.closeClick();
   };
 
   //show password
@@ -75,6 +76,18 @@ const StepThree = () => {
       }
     });
   }
+
+  //submit data
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const password = watch("password");
+    const repeatPassword = watch("repeatPassword");
+    if (truePassword.length === 0) {
+      if (password === repeatPassword) {
+        console.log(password);
+      }
+    }
+  };
 
   return (
     <>
@@ -325,6 +338,7 @@ const StepThree = () => {
                     type="submit"
                     value=" تغییر رمز"
                     className="bg-primary px-13 pb-3 pt-2 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
+                    onClick={submitHandler}
                   />
                 </div>
               </div>
