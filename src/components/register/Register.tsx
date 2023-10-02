@@ -51,6 +51,7 @@ const Register = () => {
   };
 
   const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   //phone format
   const phoneData = (e) => {
@@ -100,7 +101,11 @@ const Register = () => {
 
   //trigers
   const blurPhoneNumberHandler = (phoneNumber) => {
-    trigger(phoneNumber);
+    if (phone.length !== 12) {
+      setPhoneError("شماره تماس را به صورت صحیح وارد کنید");
+    } else {
+      setPhoneError("");
+    }
   };
 
   const blurEmailHandler = (email) => {
@@ -111,8 +116,8 @@ const Register = () => {
     trigger(password);
   };
 
-  const blurRepeatPasswordHandler = (password) => {
-    trigger(password);
+  const blurRepeatPasswordHandler = (repeatPassword) => {
+    trigger(repeatPassword);
   };
 
   return (
@@ -131,13 +136,13 @@ const Register = () => {
                 <input
                   id="phoneNumber"
                   className={`${
-                    errors.phoneNumber
+                    phoneError
                       ? " right-3 font-semibold border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-20 pb-0.5 outline-red"
                       : " right-3 font-semibold border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-20 pb-0.5 outline-primary"
                   }`}
                   onChange={phoneData}
                   value={phone}
-                  onBlur={() => blurPhoneNumberHandler("phone")}
+                  onBlur={blurPhoneNumberHandler}
                 />
 
                 <div className="absolute left-8 top-3.5">
@@ -149,16 +154,13 @@ const Register = () => {
                 </span>
                 <div className="absolute left-15 top-2.5 border-r-2 border-gray-200 h-7"></div>
                 <br></br>
-                <ul className="relative left-3 list-inside list-disc">
-                  {errors.phoneNumber &&
-                    errors.phoneNumber.type === "required" && (
-                      <li className="relative text-red text-xs text-right mt-1">
-                        <span className=" absolute right-6">
-                          وارد کردن شماره همراه اجباریست
-                        </span>
-                      </li>
-                    )}
-                </ul>
+                {phoneError ? (
+                  <ul className="relative left-3 list-inside list-disc">
+                    <li className="relative text-red text-xs text-right mt-1">
+                      <span className=" absolute right-6">{phoneError}</span>
+                    </li>
+                  </ul>
+                ) : null}
               </div>
             </div>
             <div className="relative">
@@ -214,13 +216,12 @@ const Register = () => {
                   id="repeatPassword"
                   type={passwordShown ? "text" : "password"}
                   className={`${
-                    errors.password
+                    errors.repeatPassword
                       ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 outline-red"
                       : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
                   }`}
                   {...register("repeatPassword", {
                     required: true,
-                    minLength: 8,
                   })}
                   onBlur={() => blurRepeatPasswordHandler("repeatPassword")}
                 />
@@ -252,7 +253,7 @@ const Register = () => {
                 }`}
                 {...register("password", {
                   required: true,
-                  minLength: 8,
+                  minLength: 10,
                 })}
                 onBlur={() => blurPasswordHandler("password")}
               />
@@ -340,13 +341,13 @@ const Register = () => {
                   {!letterRegex.test(checkPassword) ||
                   !numberRegex.test(checkPassword) ||
                   !symbolRegex.test(checkPassword) ||
-                  checkPassword.length < 9 ? (
+                  checkPassword.length < 10 ? (
                     <p
                       className={`${
                         !letterRegex.test(checkPassword) &&
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
-                        checkPassword.length < 9
+                        checkPassword.length < 10
                           ? "relative text-red text-[9px] font-bold text-right me-1"
                           : "relative text-warning text-[9px] font-bold text-right me-1"
                       }`}
@@ -355,13 +356,13 @@ const Register = () => {
                     </p>
                   ) : null}
 
-                  {checkPassword.length < 9 && (
+                  {checkPassword.length < 10 && (
                     <li
                       className={`${
                         !letterRegex.test(checkPassword) &&
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
-                        checkPassword.length < 9
+                        checkPassword.length < 10
                           ? "relative text-red text-[9px] font-bold text-right me-1"
                           : "relative text-warning text-[9px] font-bold text-right me-1"
                       }`}
@@ -377,7 +378,7 @@ const Register = () => {
                         !letterRegex.test(checkPassword) &&
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
-                        checkPassword.length < 9
+                        checkPassword.length < 10
                           ? "relative text-red text-[9px] font-bold text-right me-1"
                           : "relative text-warning text-[9px] font-bold text-right me-1"
                       }`}
@@ -393,7 +394,7 @@ const Register = () => {
                         !letterRegex.test(checkPassword) &&
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
-                        checkPassword.length < 9
+                        checkPassword.length < 10
                           ? "relative text-red text-[9px] font-bold text-right me-1"
                           : "relative text-warning text-[9px] font-bold text-right me-1"
                       }`}
@@ -407,7 +408,7 @@ const Register = () => {
                         !letterRegex.test(checkPassword) &&
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
-                        checkPassword.length < 9
+                        checkPassword.length < 10
                           ? "relative text-red text-[9px] font-bold text-right me-1"
                           : "relative text-warning text-[9px] font-bold text-right me-1"
                       }`}
