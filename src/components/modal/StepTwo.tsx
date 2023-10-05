@@ -114,7 +114,6 @@ function StepTwo(props) {
                   />
                 </div>
                 <div className="grid justify-items-center ms-60">
-                  {/* <Timer seconds={8} /> */}
                   <Timer />
                 </div>
                 <div className=" grid justify-center mt-14">
