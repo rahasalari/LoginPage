@@ -40,8 +40,16 @@ const StepThree = (props) => {
     setVisible(visible ? false : true);
   };
 
+  const unVisibleHandler = () => {
+    setVisible(false);
+  };
+
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
+  };
+
+  const togglePasswordUnvisiblity = () => {
+    setPasswordShown(false);
   };
 
   const blurPasswordHandler = (password) => {
@@ -291,7 +299,8 @@ const StepThree = (props) => {
 
                     <MdOutlineVisibility
                       onMouseDown={visibleHandler}
-                      onMouseUp={visibleHandler}
+                      onMouseUp={unVisibleHandler}
+                      onMouseLeave={unVisibleHandler}
                       className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                     />
                   </div>
@@ -328,7 +337,8 @@ const StepThree = (props) => {
                     </ul>
                     <MdOutlineVisibility
                       onMouseDown={togglePasswordVisiblity}
-                      onMouseUp={togglePasswordVisiblity}
+                      onMouseUp={togglePasswordUnvisiblity}
+                      onMouseLeave={togglePasswordUnvisiblity}
                       className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                     />
                   </div>

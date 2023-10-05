@@ -44,9 +44,16 @@ const Register = () => {
   const visibleHandler = () => {
     setVisible(visible ? false : true);
   };
+  const unVisibleHandler = () => {
+    setVisible(false);
+  };
+
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
+  };
+  const togglePasswordUnvisiblity = () => {
+    setPasswordShown(false);
   };
 
   const [phone, setPhone] = useState("");
@@ -134,15 +141,6 @@ const Register = () => {
       setRepeatePasswordError("");
     }
   };
-
-  // const repeatePasswordHandler = (e) => {
-  //   const repeatPassword = e.target.value;
-  //   if (repeatPassword) {
-  //     if (repeatPassword === checkPassword) {
-  //       setRepeatePasswordError("");
-  //     }
-  //   }
-  // };
 
   return (
     <>
@@ -247,13 +245,13 @@ const Register = () => {
                   {...register("repeatPassword", {
                     required: true,
                   })}
-                  // onChange={repeatePasswordHandler}
                   onBlur={blurRepeatPasswordHandler}
                 />
                 <br></br>
                 <MdOutlineVisibility
                   onMouseDown={togglePasswordVisiblity}
-                  onMouseUp={togglePasswordVisiblity}
+                  onMouseUp={togglePasswordUnvisiblity}
+                  onMouseLeave={togglePasswordUnvisiblity}
                   className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
@@ -305,7 +303,8 @@ const Register = () => {
               <br></br>
               <MdOutlineVisibility
                 onMouseDown={visibleHandler}
-                onMouseUp={visibleHandler}
+                onMouseUp={unVisibleHandler}
+                onMouseLeave={unVisibleHandler}
                 className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
               />
               <LineErrors
@@ -370,7 +369,7 @@ const Register = () => {
                 }`}
               />
               {checkPassword && (
-                <ol className="relative list-inside list-decimal mt-1">
+                <ul className="relative list-inside list-disc mt-1">
                   {!letterRegex.test(checkPassword) ||
                   !numberRegex.test(checkPassword) ||
                   !symbolRegex.test(checkPassword) ||
@@ -381,8 +380,8 @@ const Register = () => {
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
                         checkPassword.length < 10
-                          ? "relative text-red text-[9px] font-bold text-right me-1"
-                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                          ? "relative text-red text-[9.5px] font-bold text-right me-1"
+                          : "relative text-warning text-[9.5px] font-bold text-right me-1"
                       }`}
                     >
                       : پسورد باید شامل موارد زیر باشد
@@ -396,11 +395,11 @@ const Register = () => {
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
                         checkPassword.length < 10
-                          ? "relative text-red text-[9px] font-bold text-right me-1"
-                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                          ? "relative text-red text-[9.5px] font-bold text-right "
+                          : "relative text-warning text-[9.5px] font-bold text-right"
                       }`}
                     >
-                      <span className=" absolute right-3">
+                      <span className=" absolute right-4">
                         حداقل 10 کاراکتر
                       </span>
                     </li>
@@ -412,11 +411,11 @@ const Register = () => {
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
                         checkPassword.length < 10
-                          ? "relative text-red text-[9px] font-bold text-right me-1"
-                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                          ? "relative text-red text-[9.5px] font-bold text-right "
+                          : "relative text-warning text-[9.5px] font-bold text-right"
                       }`}
                     >
-                      <span className=" absolute right-3">
+                      <span className=" absolute right-4">
                         حروف بزرگ و کوچک
                       </span>
                     </li>
@@ -428,11 +427,11 @@ const Register = () => {
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
                         checkPassword.length < 10
-                          ? "relative text-red text-[9px] font-bold text-right me-1"
-                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                          ? "relative text-red text-[9.5px] font-bold text-right"
+                          : "relative text-warning text-[9.5px] font-bold text-right"
                       }`}
                     >
-                      <span className=" absolute right-3">اعداد</span>
+                      <span className=" absolute right-4">اعداد</span>
                     </li>
                   )}
                   {!symbolRegex.test(checkPassword) && (
@@ -442,14 +441,14 @@ const Register = () => {
                         !numberRegex.test(checkPassword) &&
                         !symbolRegex.test(checkPassword) &&
                         checkPassword.length < 10
-                          ? "relative text-red text-[9px] font-bold text-right me-1"
-                          : "relative text-warning text-[9px] font-bold text-right me-1"
+                          ? "relative text-red text-[9.5px] font-bold text-right "
+                          : "relative text-warning text-[9.5px] font-bold text-right "
                       }`}
                     >
-                      <span className=" absolute right-3">نشانه ها</span>
+                      <span className=" absolute right-4">نشانه ها</span>
                     </li>
                   )}
-                </ol>
+                </ul>
               )}
             </div>
           </div>

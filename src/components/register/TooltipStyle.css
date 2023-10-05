@@ -5,4 +5,5 @@
   font-weight: 700;
   position: absolute;
   margin-left: 90px;
+  z-index: 2;
 }

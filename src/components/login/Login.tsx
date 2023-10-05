@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { MdOutlineVisibility } from "react-icons/md";
@@ -19,20 +19,14 @@ const Login = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   const [visible, setVisible] = useState(false);
+
   const visibleHandler = () => {
     setVisible(visible ? false : true);
   };
 
-  // const [passwordVisible, setPasswordVisible] = useState(false);
-  const triggerZoneRef = useRef();
-
-  // const visibleHandler = () => {
-  //   setVisible(false);
-  // };
-
-  // const unVisibleHandler = () => {
-  //   setVisible(true);
-  // };
+  const unVisibleHandler = () => {
+    setVisible(false);
+  };
 
   const blurPasswordHandler = (password) => {
     trigger(password);
@@ -41,8 +35,6 @@ const Login = () => {
   const blurEmailHandler = (email) => {
     trigger(email);
   };
-
-  const ref = register("password");
 
   return (
     <>
@@ -62,14 +54,13 @@ const Login = () => {
                   type={visible ? "text" : "password"}
                   className={`${
                     errors.password
-                      ? "right-3 border-2 border-red h-12 w-54 mx-auto rounded text-right px-1 outline-red"
-                      : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 rounded text-right px-1 outline-primary"
+                      ? "right-3 border-2 border-red h-12 w-54 mx-auto rounded ps-10 pb-1 px-1 outline-red"
+                      : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ps-10 pb-1 rounded px-1 outline-primary"
                   }`}
                   {...register("password", {
                     required: true,
                   })}
                   onBlur={() => blurPasswordHandler("password")}
-                  ref={ref}
                 />
                 <br></br>
                 <ul className="relative left-3 list-inside list-disc">
@@ -83,9 +74,8 @@ const Login = () => {
                 </ul>
                 <MdOutlineVisibility
                   onMouseDown={visibleHandler}
-                  onMouseUp={visibleHandler}
-                  // onMouseLeave={unVisibleHandler}
-                  // ref={triggerZoneRef}
+                  onMouseUp={unVisibleHandler}
+                  onMouseLeave={unVisibleHandler}
                   className="absolute left-4 top-3.5 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
@@ -104,8 +94,8 @@ const Login = () => {
                 id="email"
                 className={`${
                   errors.email
-                    ? "right-3 border-2 border-red h-12 w-54 mx-auto rounded text-right px-1 outline-red"
-                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 rounded text-right px-1 outline-primary"
+                    ? "right-3 border-2 border-red h-12 w-54 mx-auto rounded px-1 outline-red"
+                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 rounded px-1 outline-primary"
                 }`}
                 {...register("email", {
                   required: true,
