@@ -1,50 +1,54 @@
-import { useState, useEffect, useRef } from "react";
-const Timer = ({ seconds }) => {
-  const [countdown, setCountdown] = useState(seconds);
+import { useState, useEffect } from "react";
 
-  const timerId = useRef();
+function Timer() {
+  const [time, setTime] = useState(180); // 3 minutes in seconds
+  const [isActive, setIsActive] = useState(true);
 
-  //format time
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time - minutes * 60);
-    if (minutes <= 60) minutes - 0 + minutes;
-    if (seconds <= 60) seconds - 0 + seconds;
-    const secondToString = seconds.toString();
-    return `0${minutes} : ${secondToString.length < 2 ? 0 : ""}${seconds}`;
+  useEffect(() => {
+    let interval = null;
+
+    if (isActive) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime - 1);
+      }, 1000);
+    }
+
+    if (time === 0) {
+      clearInterval(interval);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isActive, time]);
+
+  const restartTimer = () => {
+    setTime(180);
+    setIsActive(true);
   };
 
-  useEffect(() => {
-    timerId.current = setInterval(() => {
-      setCountdown((prev) => prev - 1);
-    }, 1000);
-    return () => clearInterval(timerId.current);
-  }, []);
-
-  useEffect(() => {
-    if (countdown < 0) {
-      clearInterval(timerId.current);
-    }
-  }, [countdown]);
-
-  // const timerHandler = () => {
-  //   console.log("1");
-  //   formatTime(countdown);
-  // };
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = (time % 60).toString().padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
 
   return (
-    <>
-      {countdown > 0 ? (
-        <p className="text-xs mt-1 text-gray-400 ">{formatTime(countdown)}</p>
-      ) : (
-        <p
+    <div>
+      {time === 0 ? (
+        <button
           className="text-primary text-xs cursor-pointer mt-2 me-9"
-          // onClick={timerHandler}
+          onClick={restartTimer}
         >
           ارسال مجدد کد
-        </p>
+        </button>
+      ) : (
+        <div className="text-xs mt-1 text-gray-400 ">{formatTime(time)}</div>
       )}
-    </>
+    </div>
   );
-};
+}
+
 export default Timer;

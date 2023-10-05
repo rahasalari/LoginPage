@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { MdOutlineVisibility } from "react-icons/md";
@@ -23,6 +23,17 @@ const Login = () => {
     setVisible(visible ? false : true);
   };
 
+  // const [passwordVisible, setPasswordVisible] = useState(false);
+  const triggerZoneRef = useRef();
+
+  // const visibleHandler = () => {
+  //   setVisible(false);
+  // };
+
+  // const unVisibleHandler = () => {
+  //   setVisible(true);
+  // };
+
   const blurPasswordHandler = (password) => {
     trigger(password);
   };
@@ -30,6 +41,8 @@ const Login = () => {
   const blurEmailHandler = (email) => {
     trigger(email);
   };
+
+  const ref = register("password");
 
   return (
     <>
@@ -56,6 +69,7 @@ const Login = () => {
                     required: true,
                   })}
                   onBlur={() => blurPasswordHandler("password")}
+                  ref={ref}
                 />
                 <br></br>
                 <ul className="relative left-3 list-inside list-disc">
@@ -66,17 +80,12 @@ const Login = () => {
                       </span>
                     </li>
                   )}
-                  {/* {errors.password && errors.password.type === "minLength" && (
-                    <li className="relative text-red text-xs text-right mt-1">
-                      <span className=" absolute right-6">
-                        .پسورد حداقل دارای 10 کاراکتر است
-                      </span>
-                    </li>
-                  )} */}
                 </ul>
                 <MdOutlineVisibility
                   onMouseDown={visibleHandler}
                   onMouseUp={visibleHandler}
+                  // onMouseLeave={unVisibleHandler}
+                  // ref={triggerZoneRef}
                   className="absolute left-4 top-3.5 text-xl text-gray-700 cursor-pointer"
                 />
               </div>

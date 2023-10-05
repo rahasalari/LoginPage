@@ -25,16 +25,15 @@ const Register = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const emailValue = data.email;
     localStorage.setItem("emailValue", JSON.stringify(emailValue));
-    phone === data.phoneNumber;
-    console.log(phone);
+
+    const phoneNumberFormat = phone.toString().split(" ").join("");
 
     const datas = {
       password: data.password,
       repeatPassword: data.repeatPassword,
       email: data.email,
-      phoneNumber: phone,
+      phoneNumber: phoneNumberFormat,
     };
-    console.log(phone.length);
 
     if (data.password === data.repeatPassword && phone.length === 12) {
       console.log(datas);
@@ -52,6 +51,7 @@ const Register = () => {
 
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [repeatePasswordError, setRepeatePasswordError] = useState("");
 
   //phone format
   const phoneData = (e) => {
@@ -72,6 +72,10 @@ const Register = () => {
     console.log(formattedNumber);
 
     setPhone(formattedNumber);
+
+    if (phone.length === 11) {
+      setPhoneError("");
+    }
   };
 
   //password validation
@@ -87,7 +91,7 @@ const Register = () => {
       !letterRegex.test(checkPassword),
       !numberRegex.test(checkPassword),
       !symbolRegex.test(checkPassword),
-      checkPassword.length < 9,
+      checkPassword.length < 10,
     ];
   }
 
@@ -108,6 +112,7 @@ const Register = () => {
     }
   };
 
+  //triggers
   const blurEmailHandler = (email) => {
     trigger(email);
   };
@@ -116,9 +121,28 @@ const Register = () => {
     trigger(password);
   };
 
-  const blurRepeatPasswordHandler = (repeatPassword) => {
-    trigger(repeatPassword);
+  const repeatPassword = watch("repeatPassword");
+  const blurRepeatPasswordHandler = () => {
+    console.log(checkPassword);
+    console.log(repeatPassword);
+    if (repeatPassword !== checkPassword) {
+      setRepeatePasswordError("مقدار تکرار رمز و رمز باید برابر باشد");
+    } else {
+      setRepeatePasswordError("");
+    }
+    if (repeatPassword === checkPassword) {
+      setRepeatePasswordError("");
+    }
   };
+
+  // const repeatePasswordHandler = (e) => {
+  //   const repeatPassword = e.target.value;
+  //   if (repeatPassword) {
+  //     if (repeatPassword === checkPassword) {
+  //       setRepeatePasswordError("");
+  //     }
+  //   }
+  // };
 
   return (
     <>
@@ -223,7 +247,8 @@ const Register = () => {
                   {...register("repeatPassword", {
                     required: true,
                   })}
-                  onBlur={() => blurRepeatPasswordHandler("repeatPassword")}
+                  // onChange={repeatePasswordHandler}
+                  onBlur={blurRepeatPasswordHandler}
                 />
                 <br></br>
                 <MdOutlineVisibility
@@ -232,8 +257,16 @@ const Register = () => {
                   className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
+              {repeatePasswordError ? (
+                <ul className="relative left-3 list-inside list-disc">
+                  <li className="relative text-red text-xs text-right mt-1">
+                    <span className=" absolute right-6">
+                      {repeatePasswordError}
+                    </span>
+                  </li>
+                </ul>
+              ) : null}
             </div>
-
             <div className="relative">
               <label
                 htmlFor="password"
@@ -248,7 +281,7 @@ const Register = () => {
                 type={visible ? "text" : "password"}
                 className={`${
                   errors.password
-                    ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 outline-red"
+                    ? "right-3 border-2  h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 "
                     : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
                 }`}
                 {...register("password", {
