@@ -297,9 +297,9 @@ const Register = () => {
                 onBlur={() => blurPasswordHandler("password")}
               />
               {showTooltip && (
-                <div className="absolute z-10 inset-0 flex-row mt-9 ms-24 ">
-                  <div className="w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-zinc-800 opacity-90 border-r-[10px] border-r-transparent mx-15"></div>
-                  <div className="absolute w-52 h-28 bg-zinc-800 opacity-90 rounded-sm">
+                <div className="absolute z-10 inset-0 flex-row mt-9 ms-32 ">
+                  <div className="w-0 h-0 border-l-[8px] border-l-transparent border-b-[10px] border-b-zinc-700 opacity-90 border-r-[8px] border-r-transparent mx-6"></div>
+                  <div className="absolute w-40 h-22 bg-zinc-700 opacity-90 rounded-sm">
                     <Tooltip />
                   </div>
                 </div>
