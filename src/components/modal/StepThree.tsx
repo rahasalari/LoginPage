@@ -215,37 +215,37 @@ const StepThree = (props) => {
                       }`}
                     />
                     {checkPassword && (
-                      <ol className="relative list-inside list-decimal mt-1">
+                      <ul className="relative list-inside list-disc mt-1">
                         {!letterRegex.test(checkPassword) ||
                         !numberRegex.test(checkPassword) ||
                         !symbolRegex.test(checkPassword) ||
-                        checkPassword.length < 9 ? (
+                        checkPassword.length < 10 ? (
                           <p
                             className={`${
                               !letterRegex.test(checkPassword) &&
                               !numberRegex.test(checkPassword) &&
                               !symbolRegex.test(checkPassword) &&
-                              checkPassword.length < 9
-                                ? "relative text-red text-[9px] font-bold text-right me-1"
-                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                              checkPassword.length < 10
+                                ? "relative text-red text-[9.5px] font-bold text-right me-1"
+                                : "relative text-warning text-[9.5px] font-bold text-right me-1"
                             }`}
                           >
                             : پسورد باید شامل موارد زیر باشد
                           </p>
                         ) : null}
 
-                        {checkPassword.length < 9 && (
+                        {checkPassword.length < 10 && (
                           <li
                             className={`${
                               !letterRegex.test(checkPassword) &&
                               !numberRegex.test(checkPassword) &&
                               !symbolRegex.test(checkPassword) &&
-                              checkPassword.length < 9
-                                ? "relative text-red text-[9px] font-bold text-right me-1"
-                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                              checkPassword.length < 10
+                                ? "relative text-red text-[9.5px] font-bold text-right me-1"
+                                : "relative text-warning text-[9.5px] font-bold text-right me-1"
                             }`}
                           >
-                            <span className=" absolute right-3">
+                            <span className=" absolute right-4">
                               حداقل 10 کاراکتر
                             </span>
                           </li>
@@ -256,12 +256,12 @@ const StepThree = (props) => {
                               !letterRegex.test(checkPassword) &&
                               !numberRegex.test(checkPassword) &&
                               !symbolRegex.test(checkPassword) &&
-                              checkPassword.length < 9
-                                ? "relative text-red text-[9px] font-bold text-right me-1"
-                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                              checkPassword.length < 10
+                                ? "relative text-red text-[9.5px] font-bold text-right me-1"
+                                : "relative text-warning text-[9.5px] font-bold text-right me-1"
                             }`}
                           >
-                            <span className=" absolute right-3">
+                            <span className=" absolute right-4">
                               حروف بزرگ و کوچک
                             </span>
                           </li>
@@ -272,12 +272,12 @@ const StepThree = (props) => {
                               !letterRegex.test(checkPassword) &&
                               !numberRegex.test(checkPassword) &&
                               !symbolRegex.test(checkPassword) &&
-                              checkPassword.length < 9
-                                ? "relative text-red text-[9px] font-bold text-right me-1"
-                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                              checkPassword.length < 10
+                                ? "relative text-red text-[9.5px] font-bold text-right me-1"
+                                : "relative text-warning text-[9.5px] font-bold text-right me-1"
                             }`}
                           >
-                            <span className=" absolute right-3">اعداد</span>
+                            <span className=" absolute right-4">اعداد</span>
                           </li>
                         )}
                         {!symbolRegex.test(checkPassword) && (
@@ -286,15 +286,15 @@ const StepThree = (props) => {
                               !letterRegex.test(checkPassword) &&
                               !numberRegex.test(checkPassword) &&
                               !symbolRegex.test(checkPassword) &&
-                              checkPassword.length < 9
-                                ? "relative text-red text-[9px] font-bold text-right me-1"
-                                : "relative text-warning text-[9px] font-bold text-right me-1"
+                              checkPassword.length < 10
+                                ? "relative text-red text-[9.5px] font-bold text-right me-1"
+                                : "relative text-warning text-[9.5px] font-bold text-right me-1"
                             }`}
                           >
-                            <span className=" absolute right-3">نشانه ها</span>
+                            <span className=" absolute right-4">نشانه ها</span>
                           </li>
                         )}
-                      </ol>
+                      </ul>
                     )}
 
                     <MdOutlineVisibility

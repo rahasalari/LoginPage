@@ -5,7 +5,6 @@ import { useState } from "react";
 import Tooltip from "../tooltip/Tooltip";
 import flag from "../../assets/flag.png";
 import LineErrors from "../lineErrors/LineErrors";
-import "./TooltipStyle.css";
 
 type Inputs = {
   email: string;
@@ -40,7 +39,15 @@ const Register = () => {
     }
   };
 
+  //states
   const [visible, setVisible] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [repeatePasswordError, setRepeatePasswordError] = useState("");
+
+  //password visibility
   const visibleHandler = () => {
     setVisible(visible ? false : true);
   };
@@ -48,7 +55,6 @@ const Register = () => {
     setVisible(false);
   };
 
-  const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
@@ -56,10 +62,13 @@ const Register = () => {
     setPasswordShown(false);
   };
 
-  const [phone, setPhone] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-  const [repeatePasswordError, setRepeatePasswordError] = useState("");
-  const [showTooltip, setShowTooltip] = useState(false);
+  //tooltip visibility
+  const tooltipshow = () => {
+    setShowTooltip(true);
+  };
+  const tooltipUnshow = () => {
+    setShowTooltip(false);
+  };
 
   //phone format
   const phoneData = (e) => {
@@ -111,7 +120,7 @@ const Register = () => {
     });
   }
 
-  //trigers
+  //triggers
   const blurPhoneNumberHandler = (phoneNumber) => {
     if (phone.length !== 12) {
       setPhoneError("شماره تماس را به صورت صحیح وارد کنید");
@@ -120,7 +129,6 @@ const Register = () => {
     }
   };
 
-  //triggers
   const blurEmailHandler = (email) => {
     trigger(email);
   };
@@ -131,8 +139,6 @@ const Register = () => {
 
   const repeatPassword = watch("repeatPassword");
   const blurRepeatPasswordHandler = () => {
-    console.log(checkPassword);
-    console.log(repeatPassword);
     if (repeatPassword !== checkPassword) {
       setRepeatePasswordError("مقدار تکرار رمز و رمز باید برابر باشد");
     } else {
@@ -141,15 +147,6 @@ const Register = () => {
     if (repeatPassword === checkPassword) {
       setRepeatePasswordError("");
     }
-  };
-
-  //showTooltip
-
-  const tooltipshow = () => {
-    setShowTooltip(true);
-  };
-  const tooltipUnshow = () => {
-    setShowTooltip(false);
   };
 
   return (
@@ -286,12 +283,11 @@ const Register = () => {
               <input
                 onMouseEnter={tooltipshow}
                 onMouseLeave={tooltipUnshow}
-                data-tooltip-id="my-tooltip"
                 id="password"
                 type={visible ? "text" : "password"}
                 className={`${
                   errors.password
-                    ? "right-3 border-2  h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 "
+                    ? "right-3 border-2  h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 outline-primary"
                     : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
                 }`}
                 {...register("password", {
@@ -301,7 +297,7 @@ const Register = () => {
                 onBlur={() => blurPasswordHandler("password")}
               />
               {showTooltip && (
-                <div className="absolute inset-0 flex-row mt-8 ms-24 ">
+                <div className="absolute z-10 inset-0 flex-row mt-9 ms-24 ">
                   <div className="w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-zinc-800 opacity-90 border-r-[10px] border-r-transparent mx-15"></div>
                   <div className="absolute w-52 h-28 bg-zinc-800 opacity-90 rounded-sm">
                     <Tooltip />
