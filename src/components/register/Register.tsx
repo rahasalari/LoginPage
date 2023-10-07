@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { MdOutlineVisibility } from "react-icons/md";
 import { useState } from "react";
-import { Tooltip } from "react-tooltip";
+import Tooltip from "../tooltip/Tooltip";
 import flag from "../../assets/flag.png";
 import LineErrors from "../lineErrors/LineErrors";
 import "./TooltipStyle.css";
@@ -59,6 +59,7 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [repeatePasswordError, setRepeatePasswordError] = useState("");
+  const [showTooltip, setShowTooltip] = useState(false);
 
   //phone format
   const phoneData = (e) => {
@@ -140,6 +141,15 @@ const Register = () => {
     if (repeatPassword === checkPassword) {
       setRepeatePasswordError("");
     }
+  };
+
+  //showTooltip
+
+  const tooltipshow = () => {
+    setShowTooltip(true);
+  };
+  const tooltipUnshow = () => {
+    setShowTooltip(false);
   };
 
   return (
@@ -274,6 +284,8 @@ const Register = () => {
               </label>
 
               <input
+                onMouseEnter={tooltipshow}
+                onMouseLeave={tooltipUnshow}
                 data-tooltip-id="my-tooltip"
                 id="password"
                 type={visible ? "text" : "password"}
@@ -288,17 +300,14 @@ const Register = () => {
                 })}
                 onBlur={() => blurPasswordHandler("password")}
               />
-
-              <Tooltip
-                id="my-tooltip"
-                place="bottom-start"
-                html="<ol> :پسورد باید شامل موارد زیر باشد
-                </b><br />حروف بزرگ و کوچک
-                </b><br />اعداد
-                </b><br />نشانه ها
-                </b><br />حداقل 10 کاراکتر باشد
-                </ol>"
-              />
+              {showTooltip && (
+                <div className="absolute inset-0 flex-row mt-8 ms-24 ">
+                  <div className="w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-zinc-800 opacity-90 border-r-[10px] border-r-transparent mx-15"></div>
+                  <div className="absolute w-52 h-28 bg-zinc-800 opacity-90 rounded-sm">
+                    <Tooltip />
+                  </div>
+                </div>
+              )}
 
               <br></br>
               <MdOutlineVisibility
