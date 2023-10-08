@@ -126,7 +126,7 @@ const Login = () => {
             <input
               type="submit"
               value="ورود"
-              className=" bg-primary px-16 pb-3 pt-1 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
+              className=" bg-primary px-16 pb-3 pt-1 text-white text-xl text-center rounded-[4px] cursor-pointer font-semibold"
             />
           </div>
         </form>
