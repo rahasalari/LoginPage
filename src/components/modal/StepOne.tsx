@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { IoCloseOutline } from "react-icons/io5";
+import { IoIosClose } from "react-icons/io";
 
 type Inputs = {
   email: string;
@@ -55,10 +55,10 @@ const StepOne = (props) => {
       {showModal && (
         <>
           <div className=" my-auto z-50">
-            <div className="fixed inset-0 flex-row justify-center mx-auto my-auto w-144 h-[530px] bg-white border rounded-2xl">
-              <div>
-                <IoCloseOutline
-                  className="bg-gray-200 rounded-md text-2xl ms-7 mt-6 w-7 h-6 cursor-pointer"
+            <div className="fixed inset-0 flex-row justify-center mx-auto my-auto w-[630px] h-[530px] bg-white border rounded-2xl">
+              <div className="">
+                <IoIosClose
+                  className="bg-gray-200 rounded-md text-2xl ms-8 mt-7 w-10 h-9 cursor-pointer"
                   onClick={closeHandler}
                 />
               </div>
@@ -71,7 +71,7 @@ const StepOne = (props) => {
               >
                 <label
                   htmlFor="email"
-                  className="absolute right-48 -top-3 text-sm font-semibold bg-white w-12 "
+                  className="absolute right-52 -top-3 text-sm font-semibold bg-white w-12 "
                 >
                   ایمیل
                 </label>
@@ -79,8 +79,8 @@ const StepOne = (props) => {
                   id="email"
                   className={`${
                     errors.email
-                      ? " right-3 border-2 border-red h-12 w-54 mx-auto rounded ps-2 outline-red"
-                      : " right-3 border h-12 w-54 mx-auto placeholder-gray-400 rounded ps-2 outline-primary"
+                      ? " right-3 border-2 h-13 w-60 border-red mx-auto rounded ps-2 outline-red"
+                      : " right-3 border h-13 w-60 mx-auto placeholder-gray-400 rounded ps-2 outline-primary"
                   }`}
                   {...register("email", {
                     required: true,
@@ -105,14 +105,17 @@ const StepOne = (props) => {
                     </li>
                   )}
                 </ul>
-                <a className="absolute mt-2 right-44 text-info text-12 font-bold cursor-pointer">
+                <a
+                  className="absolute mt-2 right-48 text-info text-12 font-bold cursor-pointer"
+                  onClick={closeHandler}
+                >
                   بازگشت به صفحه ورود
                 </a>
                 <div className="flex justify-center mt-24">
                   <input
                     type="submit"
                     value="ادامه"
-                    className=" bg-primary px-20 pb-3 pt-2 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
+                    className=" bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-[4px] cursor-pointer font-semibold"
                     onClick={(e) => {
                       e.preventDefault();
                       click();

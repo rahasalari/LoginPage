@@ -158,7 +158,7 @@ const Register = () => {
               <div className="relative">
                 <label
                   htmlFor="phoneNumber"
-                  className="absolute left-44 -top-3 text-sm font-semibold bg-white w-12 text-center"
+                  className="absolute left-48 -top-3 text-sm font-semibold bg-white w-12 text-center"
                 >
                   موبایل
                 </label>
@@ -166,8 +166,8 @@ const Register = () => {
                   id="phoneNumber"
                   className={`${
                     phoneError
-                      ? " right-3 font-semibold border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-20 pb-0.5 outline-red"
-                      : " right-3 font-semibold border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-20 pb-0.5 outline-primary"
+                      ? " right-3 font-semibold border-2 border-red h-13 w-60  mx-auto ms-4 rounded ps-20 pb-0.5 outline-red"
+                      : " right-3 font-semibold border h-13 w-60  mx-auto placeholder-gray-400 ms-4 rounded ps-20 pb-0.5 outline-primary"
                   }`}
                   onChange={phoneData}
                   value={phone}
@@ -195,7 +195,7 @@ const Register = () => {
             <div className="relative">
               <label
                 htmlFor="email"
-                className="absolute left-44 -top-3 text-sm font-semibold bg-white w-12 text-center"
+                className="absolute left-48 -top-3 text-sm font-semibold bg-white w-12 text-center"
               >
                 ایمیل
               </label>
@@ -203,8 +203,8 @@ const Register = () => {
                 id="email"
                 className={`${
                   errors.email
-                    ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded px-1 outline-red"
-                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded px-1 outline-primary"
+                    ? "right-3 border-2 border-red h-13 w-60  mx-auto ms-4 rounded px-1 outline-red"
+                    : "right-3 border h-13 w-60  mx-auto placeholder-gray-400 ms-4 rounded px-1 outline-primary"
                 }`}
                 {...register("email", {
                   required: "required",
@@ -237,7 +237,7 @@ const Register = () => {
               <div className="relative">
                 <label
                   htmlFor="repeatPassword"
-                  className="absolute left-36 -top-3 text-sm font-semibold bg-white w-20 text-center"
+                  className="absolute left-40 -top-3 text-sm font-semibold bg-white w-20 text-center"
                 >
                   تکرار رمز
                 </label>
@@ -246,8 +246,8 @@ const Register = () => {
                   type={passwordShown ? "text" : "password"}
                   className={`${
                     errors.repeatPassword
-                      ? "right-3 border-2 border-red h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 outline-red"
-                      : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
+                      ? "right-3 border-2 border-red h-13 w-60  mx-auto ms-4 rounded ps-10 pb-1 outline-red"
+                      : "right-3 border h-13 w-60 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
                   }`}
                   {...register("repeatPassword", {
                     required: true,
@@ -259,7 +259,7 @@ const Register = () => {
                   onMouseDown={togglePasswordVisiblity}
                   onMouseUp={togglePasswordUnvisiblity}
                   onMouseLeave={togglePasswordUnvisiblity}
-                  className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
+                  className="absolute left-7 top-4 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
               {repeatePasswordError ? (
@@ -275,7 +275,7 @@ const Register = () => {
             <div className="relative">
               <label
                 htmlFor="password"
-                className="absolute left-44 -top-3 text-sm font-semibold bg-white w-12 text-center"
+                className="absolute left-48 -top-3 text-sm font-semibold bg-white w-12 text-center"
               >
                 رمز
               </label>
@@ -287,8 +287,8 @@ const Register = () => {
                 type={visible ? "text" : "password"}
                 className={`${
                   errors.password
-                    ? "right-3 border-2  h-12 w-54 mx-auto ms-4 rounded ps-10 pb-1 outline-primary"
-                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
+                    ? "right-3 border-2 h-13 w-60 mx-auto ms-4 rounded ps-10 pb-1 outline-primary"
+                    : "right-3 border h-13 w-60 mx-auto placeholder-gray-400 ms-4 rounded ps-10 pb-1 outline-primary"
                 }`}
                 {...register("password", {
                   required: true,
@@ -310,67 +310,67 @@ const Register = () => {
                 onMouseDown={visibleHandler}
                 onMouseUp={unVisibleHandler}
                 onMouseLeave={unVisibleHandler}
-                className="absolute left-7 top-3.5 text-xl text-gray-700 cursor-pointer"
+                className="absolute left-7 top-4 text-xl text-gray-700 cursor-pointer"
               />
               <LineErrors
                 errors={errors}
                 firstLineError={`${
-                  (!passwordErrors && "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (!passwordErrors && "rounded-lg w-[56px] h-1 bg-gray-200") ||
                   (passwordErrors &&
                     truePassword.length === 4 &&
-                    "rounded-lg w-[52px] h-1 bg-red") ||
+                    "rounded-lg w-[56px] h-1 bg-red") ||
                   (passwordErrors &&
                     truePassword.length < 4 &&
                     truePassword.length > 0 &&
-                    "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                    "rounded-lg w-[56px] h-1 bg-gray-200") ||
                   (passwordErrors &&
                     truePassword.length === 0 &&
-                    "rounded-lg w-[52px] h-1 bg-success")
+                    "rounded-lg w-[56px] h-1 bg-success")
                 }`}
                 secondLineError={`${
-                  (!passwordErrors && "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (!passwordErrors && "rounded-lg w-[56px] h-1 bg-gray-200") ||
                   (passwordErrors &&
                     truePassword.length === 4 &&
-                    "rounded-lg w-[52px] h-1 bg-red") ||
+                    "rounded-lg w-[56px] h-1 bg-red") ||
                   (passwordErrors &&
                     truePassword.length === 3 &&
-                    "rounded-lg w-[52px] h-1 bg-warning") ||
+                    "rounded-lg w-[56px] h-1 bg-warning") ||
                   (passwordErrors &&
                     truePassword.length < 3 &&
                     truePassword.length > 0 &&
-                    "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                    "rounded-lg w-[56px] h-1 bg-gray-200") ||
                   (passwordErrors &&
                     truePassword.length === 0 &&
-                    "rounded-lg w-[52px] h-1 bg-success")
+                    "rounded-lg w-[56px] h-1 bg-success")
                 }`}
                 thirdLineError={`${
-                  (!passwordErrors && "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (!passwordErrors && "rounded-lg w-[56px] h-1 bg-gray-200") ||
                   (passwordErrors &&
                     truePassword.length === 4 &&
-                    "rounded-lg w-[52px] h-1 bg-red") ||
+                    "rounded-lg w-[56px] h-1 bg-red") ||
                   (passwordErrors &&
                     truePassword.length > 1 &&
                     truePassword.length < 4 &&
-                    "rounded-lg w-[52px] h-1 bg-warning") ||
+                    "rounded-lg w-[56px] h-1 bg-warning") ||
                   (passwordErrors &&
                     truePassword.length === 1 &&
-                    "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                    "rounded-lg w-[56px] h-1 bg-gray-200") ||
                   (passwordErrors &&
                     truePassword.length === 0 &&
-                    "rounded-lg w-[52px] h-1 bg-success")
+                    "rounded-lg w-[56px] h-1 bg-success")
                 }`}
                 fourthLineError={`${
-                  (!passwordErrors && "rounded-lg w-[52px] h-1 bg-gray-200") ||
+                  (!passwordErrors && "rounded-lg w-[56px] h-1 bg-gray-200") ||
                   (passwordErrors &&
                     truePassword.length === 4 &&
-                    "rounded-lg w-[52px] h-1 bg-red") ||
+                    "rounded-lg w-[56px] h-1 bg-red") ||
                   (passwordErrors &&
                     truePassword.length > 0 &&
                     truePassword.length < 4 &&
-                    "rounded-lg w-[52px] h-1 bg-warning") ||
+                    "rounded-lg w-[56px] h-1 bg-warning") ||
                   (passwordErrors &&
                     truePassword.length === 0 &&
-                    "rounded-lg w-[52px] h-1 bg-success")
+                    "rounded-lg w-[56px] h-1 bg-success")
                 }`}
               />
               {checkPassword && (
@@ -436,7 +436,7 @@ const Register = () => {
                           : "relative text-warning text-[9.5px] font-bold text-right"
                       }`}
                     >
-                      <span className=" absolute right-4">اعداد</span>
+                      <span className="absolute right-4">اعداد</span>
                     </li>
                   )}
                   {!symbolRegex.test(checkPassword) && (
@@ -461,12 +461,13 @@ const Register = () => {
             <input
               type="submit"
               value="ارسال کد"
-              className="bg-primary px-13 pb-3 pt-2 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
+              className="bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
             />
           </div>
           <p className="text-center text-gray-500 text-xs mt-2">
             با کلیک بر روی دکمه ارسال کد شما
-            <a className="text-info cursor-pointer"> قوانین </a> را پذیرفته اید
+            <a className="text-info cursor-pointer"> قوانین </a>
+            <span>را پذیرفته اید</span>
           </p>
         </form>
       </div>

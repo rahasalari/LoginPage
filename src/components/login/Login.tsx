@@ -45,7 +45,7 @@ const Login = () => {
               <div className="relative">
                 <label
                   htmlFor="name"
-                  className="absolute left-40 -top-3 text-sm font-semibold bg-white w-12 text-center"
+                  className="absolute left-44 -top-3 text-sm font-semibold bg-white w-12 text-center"
                 >
                   رمز
                 </label>
@@ -54,8 +54,8 @@ const Login = () => {
                   type={visible ? "text" : "password"}
                   className={`${
                     errors.password
-                      ? "right-3 border-2 border-red h-12 w-54 mx-auto rounded ps-10 pb-1 px-1 outline-red"
-                      : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 ps-10 pb-1 rounded px-1 outline-primary"
+                      ? "right-3 border-2 border-red h-13 w-60 mx-auto rounded ps-10 pb-1 px-1 outline-red"
+                      : "right-3 border h-13 w-60 mx-auto placeholder-gray-400 ps-10 pb-1 rounded px-1 outline-primary"
                   }`}
                   {...register("password", {
                     required: true,
@@ -76,7 +76,7 @@ const Login = () => {
                   onMouseDown={visibleHandler}
                   onMouseUp={unVisibleHandler}
                   onMouseLeave={unVisibleHandler}
-                  className="absolute left-4 top-3.5 text-xl text-gray-700 cursor-pointer"
+                  className="absolute left-4 top-4 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
               <div className="flex justify-end mt-2">
@@ -86,7 +86,7 @@ const Login = () => {
             <div className="relative">
               <label
                 htmlFor="name"
-                className="absolute left-40 -top-3 text-sm font-semibold bg-white w-12 text-center"
+                className="absolute left-44 -top-3 text-sm font-semibold bg-white w-12 text-center"
               >
                 ایمیل
               </label>
@@ -94,8 +94,8 @@ const Login = () => {
                 id="email"
                 className={`${
                   errors.email
-                    ? "right-3 border-2 border-red h-12 w-54 mx-auto rounded px-1 outline-red"
-                    : "right-3 border h-12 w-54 mx-auto placeholder-gray-400 rounded px-1 outline-primary"
+                    ? "right-3 border-2 border-red h-13 w-60 mx-auto rounded px-1 outline-red"
+                    : "right-3 border h-13 w-60 mx-auto placeholder-gray-400 rounded px-1 outline-primary"
                 }`}
                 {...register("email", {
                   required: true,
@@ -126,7 +126,7 @@ const Login = () => {
             <input
               type="submit"
               value="ورود"
-              className=" bg-primary px-16 pb-3 pt-1 text-white text-xl text-center rounded-[4px] cursor-pointer font-semibold"
+              className=" bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-[4px] cursor-pointer font-semibold"
             />
           </div>
         </form>
