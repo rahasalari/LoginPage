@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Timer from "../timer/Timer";
@@ -26,18 +27,28 @@ const Verificationcode = () => {
   const email = localStorage.getItem("emailValue");
   const emailValue = email?.replace(/"|'/g, "");
 
+  //refs
+  const firstInputRef = useRef(null);
+  const secondInputRef = useRef(null);
+  const thirdInputRef = useRef(null);
+  const fourthInputRef = useRef(null);
+
+  const handleKeyDown = (e) => {
+    console.log("1");
+  };
+
   return (
     <>
       <div className="">
         <div className="flex float-right me-7">
           <Link
-            className="text-primary text-xs pt-2 me-1 cursor-pointer"
+            className="text-primary text-xs pt-1 me-1 cursor-pointer font-semibold"
             to="/register"
           >
             ویرایش ایمیل
           </Link>
-          <p className="me-1 font-semibold semibold text-lg">: {emailValue}</p>
-          <p className="font-semibold text-lg">ارسال کد به ایمیل</p>
+          <p className="me-1 font-semibold text-[16.5px]">: {emailValue}</p>
+          <p className="font-semibold text-[16.5px] me-3">ارسال کد به ایمیل</p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex gap-2 justify-center mt-24">
@@ -48,6 +59,8 @@ const Verificationcode = () => {
               {...register("firstInput", {
                 required: true,
               })}
+              ref={firstInputRef}
+              onKeyUp={handleKeyDown}
             />
             <input
               id="secondInput"
@@ -56,6 +69,7 @@ const Verificationcode = () => {
               {...register("secondInput", {
                 required: true,
               })}
+              ref={secondInputRef}
             />
             <input
               id="thirdInput"
@@ -64,6 +78,7 @@ const Verificationcode = () => {
               {...register("thirdInput", {
                 required: true,
               })}
+              ref={thirdInputRef}
             />
             <input
               id="fourthInput"
@@ -72,6 +87,7 @@ const Verificationcode = () => {
               {...register("fourthInput", {
                 required: true,
               })}
+              ref={fourthInputRef}
             />
           </div>
           <div className="grid justify-items-center ms-60">
@@ -81,7 +97,7 @@ const Verificationcode = () => {
             <input
               type="submit"
               value="ثبت نام"
-              className="bg-primary px-15 pb-3 pt-2 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
+              className="bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-[4px] cursor-pointer font-semibold"
             />
           </div>
         </form>
