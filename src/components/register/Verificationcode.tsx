@@ -28,13 +28,19 @@ const Verificationcode = () => {
   const emailValue = email?.replace(/"|'/g, "");
 
   //refs
-  const firstInputRef = useRef(null);
-  const secondInputRef = useRef(null);
-  const thirdInputRef = useRef(null);
-  const fourthInputRef = useRef(null);
+  const inputRefs = useRef([]);
 
-  const handleKeyDown = (e) => {
-    console.log("1");
+  const handleKeyDown = (event, index) => {
+    // Set focus to the next input element
+    if (event.key === "Enter") {
+      const nextIndex = (index + 1) % inputRefs.current.length;
+      inputRefs.current[nextIndex].current.focus();
+      console.log("a");
+    }
+  };
+
+  const createRef = (index) => {
+    inputRefs.current[index] = useRef();
   };
 
   return (
@@ -59,8 +65,8 @@ const Verificationcode = () => {
               {...register("firstInput", {
                 required: true,
               })}
-              ref={firstInputRef}
-              onKeyUp={handleKeyDown}
+              ref={createRef(0)}
+              onKeyDown={(event) => handleKeyDown(event, 0)}
             />
             <input
               id="secondInput"
@@ -69,7 +75,8 @@ const Verificationcode = () => {
               {...register("secondInput", {
                 required: true,
               })}
-              ref={secondInputRef}
+              ref={createRef(1)}
+              onKeyDown={(event) => handleKeyDown(event, 1)}
             />
             <input
               id="thirdInput"
@@ -78,7 +85,8 @@ const Verificationcode = () => {
               {...register("thirdInput", {
                 required: true,
               })}
-              ref={thirdInputRef}
+              ref={createRef(2)}
+              onKeyDown={(event) => handleKeyDown(event, 2)}
             />
             <input
               id="fourthInput"
@@ -87,7 +95,8 @@ const Verificationcode = () => {
               {...register("fourthInput", {
                 required: true,
               })}
-              ref={fourthInputRef}
+              ref={createRef(3)}
+              onKeyDown={(event) => handleKeyDown(event, 3)}
             />
           </div>
           <div className="grid justify-items-center ms-60">

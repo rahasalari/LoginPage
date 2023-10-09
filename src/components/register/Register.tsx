@@ -174,14 +174,14 @@ const Register = () => {
                   onBlur={blurPhoneNumberHandler}
                 />
 
-                <div className="absolute left-8 top-3.5">
+                <div className="absolute left-8 top-4">
                   <img src={flag} className=" w-5" />
                   <p className=" text-9 font-bold">ایران</p>
                 </div>
                 <span className="absolute font-semibold left-16 pt-[11.5px] text-slate-700">
                   +98
                 </span>
-                <div className="absolute left-15 top-2.5 border-r-2 border-gray-200 h-7"></div>
+                <div className="absolute left-15 top-3 border-r-2 border-gray-200 h-7"></div>
                 <br></br>
                 {phoneError ? (
                   <ul className="relative left-3 list-inside list-disc">
