@@ -89,7 +89,7 @@ const StepOne = (props) => {
                   onBlur={() => blurEmailHandler("email")}
                 />
                 <br></br>
-                <ul className="relative right-[164px] list-inside list-disc">
+                <ul className="relative right-[179px] list-inside list-disc">
                   {errors.email && errors.email.type === "required" && (
                     <li className="relative text-red text-xs text-right mt-1">
                       <span className=" absolute right-6">

@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="pt-14">
+      <div className="relative pt-14">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex justify-center gap-36">
             <div>
@@ -79,9 +79,9 @@ const Login = () => {
                   className="absolute left-4 top-4 text-xl text-gray-700 cursor-pointer"
                 />
               </div>
-              <div className="flex justify-end mt-2">
+              {/* <div className="flex justify-end mt-2">
                 <ForgetPasswordModal />
-              </div>
+              </div> */}
             </div>
             <div className="relative">
               <label
@@ -130,6 +130,9 @@ const Login = () => {
             />
           </div>
         </form>
+        <div className="absolute flex ms-96">
+          <ForgetPasswordModal />
+        </div>
       </div>
       <Outlet />
     </>

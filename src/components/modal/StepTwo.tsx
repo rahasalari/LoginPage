@@ -1,55 +1,19 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import Timer from "../timer/Timer";
+import { useState, useRef } from "react";
+import FourNumberInput from "../fourNumberInput/fourNumberInput";
 import { IoIosClose } from "react-icons/io";
 
-type Inputs = {
-  firstInput: string;
-  secondInput: string;
-  thirdInput: string;
-  fourthInput: string;
-};
-
 function StepTwo(props) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm<Inputs>();
-
-  //get code
-  const onSubmit = (data) => {
-    const separateCode = Object.values(data);
-    const code = separateCode.join("");
-    console.log(code);
-  };
-
   //show modal
   const [showModal, setShowModal] = useState<boolean>(true);
   const closeHandler = () => {
     setShowModal(false);
-    reset();
     props.closeClick();
+    // reset();
   };
 
   //get email
   const email = localStorage.getItem("modifyEmail");
   const modifyEmail = email?.replace(/"|'/g, "");
-
-  //get code by onclick
-  function click() {
-    const firstInput = watch("firstInput");
-    const secondInput = watch("secondInput");
-    const thirdInput = watch("thirdInput");
-    const fourthInput = watch("fourthInput");
-    const code = `${firstInput}${secondInput}${thirdInput}${fourthInput}`;
-    console.log(code);
-    if (code.length === 4) {
-      props.onCliclProp();
-    }
-  }
 
   return (
     <>
@@ -77,56 +41,8 @@ function StepTwo(props) {
                 <span className=" text-primary px-2">{modifyEmail} </span>کد
                 ارسال شده به
               </p>
-
-              <div onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex gap-2 justify-center mt-14">
-                  <input
-                    id="firstInput"
-                    className="border-b-8 w-16 outline-0 text-2xl font-semibold text-center focus:border-b-primary"
-                    maxLength={1}
-                    {...register("firstInput", {
-                      required: true,
-                    })}
-                  />
-                  <input
-                    id="secondInput"
-                    className=" border-b-8 w-16 outline-0 text-2xl font-semibold text-center focus:border-b-primary "
-                    maxLength={1}
-                    {...register("secondInput", {
-                      required: true,
-                    })}
-                  />
-                  <input
-                    id="thirdInput"
-                    className=" border-b-8 w-16 outline-0 text-2xl font-semibold text-center focus:border-b-primary"
-                    maxLength={1}
-                    {...register("thirdInput", {
-                      required: true,
-                    })}
-                  />
-                  <input
-                    id="fourthInput"
-                    className=" border-b-8 w-16 outline-0 text-2xl font-semibold text-center focus:border-b-primary"
-                    maxLength={1}
-                    {...register("fourthInput", {
-                      required: true,
-                    })}
-                  />
-                </div>
-                <div className="grid justify-items-center ms-60">
-                  <Timer />
-                </div>
-                <div className=" grid justify-center mt-14">
-                  <input
-                    type="submit"
-                    value="ادامه "
-                    className="bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      click();
-                    }}
-                  />
-                </div>
+              <div className="mt-14">
+                <FourNumberInput value="ادامه" />
               </div>
             </div>
           </div>
