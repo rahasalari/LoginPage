@@ -37,8 +37,11 @@ const Login = () => {
   };
 
   return (
-    <>
-      <div className="relative pt-14">
+    <div className="reative">
+      <div className="absolute flex justify-center w-full mt-28 -left-[110px]">
+        <ForgetPasswordModal />
+      </div>
+      <div className="pt-14">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex justify-center gap-36">
             <div>
@@ -130,12 +133,9 @@ const Login = () => {
             />
           </div>
         </form>
-        <div className="absolute flex ms-96">
-          <ForgetPasswordModal />
-        </div>
       </div>
       <Outlet />
-    </>
+    </div>
   );
 };
 
