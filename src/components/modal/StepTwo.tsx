@@ -15,9 +15,9 @@ function StepTwo(props) {
   const email = localStorage.getItem("modifyEmail");
   const modifyEmail = email?.replace(/"|'/g, "");
 
-  function click() {
-    props.onCliclProp();
-  }
+  // function click() {
+  //   props.onCliclProp();
+  // }
 
   return (
     <>
@@ -45,14 +45,11 @@ function StepTwo(props) {
                 <span className=" text-primary px-2">{modifyEmail} </span>کد
                 ارسال شده به
               </p>
-              <div
-                className="mt-14"
-                onClick={(e) => {
-                  e.preventDefault();
-                  click();
-                }}
-              >
-                <FourNumberInput value="ادامه" />
+              <div className="mt-14">
+                <FourNumberInput
+                  value="ادامه"
+                  // clickHandler={click}
+                />
               </div>
             </div>
           </div>

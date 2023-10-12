@@ -2,6 +2,8 @@ import { useRef } from "react";
 import Timer from "../timer/Timer";
 
 const FourNumberInput = (props) => {
+  const { value, clickHandler } = props;
+
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
   const handleKeyUp = (index, event) => {
@@ -44,8 +46,9 @@ const FourNumberInput = (props) => {
         <div className=" grid justify-center mt-14">
           <input
             type="submit"
-            value={props.value}
+            value={value}
             className="bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-[4px] cursor-pointer font-semibold"
+            onClick={clickHandler}
           />
         </div>
       </form>

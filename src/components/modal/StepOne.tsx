@@ -116,10 +116,10 @@ const StepOne = (props) => {
                     type="submit"
                     value="ادامه"
                     className=" bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-[4px] cursor-pointer font-semibold"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      click();
-                    }}
+                    // onClick={(e) => {
+                    //   e.preventDefault();
+                    //   click();
+                    // }}
                   />
                 </div>
               </div>
