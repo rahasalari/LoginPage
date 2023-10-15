@@ -464,11 +464,14 @@ const Register = () => {
               className="bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-sm cursor-pointer font-semibold"
             />
           </div>
-          <p className="text-center text-gray-500 text-xs mt-2">
-            با کلیک بر روی دکمه ارسال کد شما
-            <a className="text-info cursor-pointer"> قوانین </a>
-            <span>را پذیرفته اید</span>
-          </p>
+          <div className="flex justify-center text-gray-500 text-xs mt-2">
+            <p>.</p>
+            <p className="text-gray-500 text-xs">را پذیرفته اید</p>
+            <a className="text-info cursor-pointer px-1"> قوانین </a>
+            <p className="text-gray-500 text-xs mt">
+              با کلیک بر روی دکمه ارسال کد شما
+            </p>
+          </div>
         </form>
       </div>
       <Outlet />

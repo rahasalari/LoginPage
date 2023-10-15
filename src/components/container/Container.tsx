@@ -10,7 +10,8 @@ const Container = () => {
   const [selected, setSelected] = useState(address);
 
   return (
-    <div className="bg-cover bg-aliceprimary h-screen w-full grid items-center">
+    <div className="bg-cover bg-aliceprimary min-h-screen grid items-center">
+      {/* h-screen w-full */}
       <div className="bg-cover bg-snow rounded-3xl h-8/9 ms-15 me-15 mt-10 mb-10 ">
         <p className="  text-center text-4xl font-bold pt-20">AccessTool</p>
         <div className="flex justify-center mt-24">

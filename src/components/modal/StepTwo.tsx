@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import FourNumberInput from "../fourNumberInput/fourNumberInput";
+import FourNumberInput from "../fourNumberInput/FourNumberInput";
 import { IoIosClose } from "react-icons/io";
 
 function StepTwo(props) {
@@ -15,9 +15,10 @@ function StepTwo(props) {
   const email = localStorage.getItem("modifyEmail");
   const modifyEmail = email?.replace(/"|'/g, "");
 
-  // function click() {
-  //   props.onCliclProp();
-  // }
+  function click() {
+    props.onCliclProp();
+    console.log("a");
+  }
 
   return (
     <>
@@ -46,10 +47,7 @@ function StepTwo(props) {
                 ارسال شده به
               </p>
               <div className="mt-14">
-                <FourNumberInput
-                  value="ادامه"
-                  // clickHandler={click}
-                />
+                <FourNumberInput value="ادامه" clickProp={click} />
               </div>
             </div>
           </div>

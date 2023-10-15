@@ -38,7 +38,13 @@ const Login = () => {
 
   return (
     <div className="reative">
-      <div className="absolute flex justify-center w-full mt-28 -left-[110px]">
+      <div
+        className={`${
+          errors.password
+            ? "absolute flex justify-center w-full mt-32 -left-[110px]"
+            : "absolute flex justify-center w-full mt-28 -left-[110px]"
+        }`}
+      >
         <ForgetPasswordModal />
       </div>
       <div className="pt-14">

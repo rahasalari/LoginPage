@@ -2,7 +2,7 @@ import { useRef } from "react";
 import Timer from "../timer/Timer";
 
 const FourNumberInput = (props) => {
-  const { value, clickHandler } = props;
+  const { value } = props;
 
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
@@ -22,8 +22,8 @@ const FourNumberInput = (props) => {
     const fourthInput = e.target[3].value;
     const arrayCode = [firstInput, secondInput, thirdInput, fourthInput];
     const code = arrayCode.join("");
-
     console.log(code);
+    props.clickProp();
   };
 
   return (
@@ -48,7 +48,6 @@ const FourNumberInput = (props) => {
             type="submit"
             value={value}
             className="bg-primary px-20 pb-4 pt-3 text-white text-xl text-center rounded-[4px] cursor-pointer font-semibold"
-            onClick={clickHandler}
           />
         </div>
       </form>
